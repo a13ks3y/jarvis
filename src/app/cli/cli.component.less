@@ -1,0 +1,55 @@
+// todo overflow!
+.cli {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  left: 0;
+  top: 0;
+  input, input:focus, input:hover, input:visited, input:active{
+    background: transparent;
+    border: none;
+    outline: none;
+    color: green;
+    font-family: monospace;
+    position: absolute;
+    z-index: 27;
+  }
+
+  z-index: 15;
+}
+.cli .cli-toggle {
+  position: absolute;
+  display: inline-block;
+  width: 3.66rem;
+  height: 6.66rem;
+  font-size: 3.33rem;
+  text-align: center;
+  line-height: 6.66rem;
+  vertical-align: middle;
+  color: black;
+  margin: 1rem;
+  padding: 0;
+  border: 1px solid #000042;
+  border-radius: 1rem;
+  background: rgba(255,255,255, 0.666);
+  z-index: 20;
+}
+
+.cli-body {
+  position: absolute;
+  display: block;
+  padding: 3.33rem 6.66rem;
+  background: rgba(0,0,0, 0.666);
+  top: 0;
+  transition: top ease-in-out;
+  z-index: 10;
+  font-family: monospace;
+  color: green;
+}
+.cli-body__collapsed {
+  height: 50vh;
+  top: -50vh;
+  display: none;
+}

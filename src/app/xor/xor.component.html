@@ -1,0 +1,9 @@
+<div class="block">
+  <label for="xor-mode">
+    Decrypt:
+    <input id="xor-mode" type="checkbox" [(ngModel)]="inDecryptMode"/>
+  </label>
+  <input type="text" [(ngModel)]="txt" (ngModelChange)="somethingChanged($event)" placeholder="Text to encrypt"/>
+  <input type="text" [(ngModel)]="key" (ngModelChange)="somethingChanged($event)" placeholder="Secret key"/>
+  <input type="text" [(ngModel)]="cypher" (ngModelChange)="somethingChanged($event)" placeholder="cypher">
+</div>
