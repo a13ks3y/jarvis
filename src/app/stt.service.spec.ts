@@ -20,7 +20,7 @@ describe('SttService', () => {
   });
 
   it('should has initialized recognition', () => {
-    expect(service.recognition).toBeInstanceOf(SpeechRecognition);
+    expect(service.recognition).toBeInstanceOf(SttService.SpeechRecognition);
   });
 
   it('should convert audio input to text', () => {

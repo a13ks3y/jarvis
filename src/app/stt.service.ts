@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 
-//const SpeechRecognition = window['SpeechRecognition'] || window['webkitSpeechRecognition'];
-//const SpeechGrammarList = window['SpeechGrammarList'] || window['webkitSpeechGrammarList'];
-//const SpeechRecognitionEvent =window[' SpeechRecognitionEvent'] || window['webkitSpeechRecognitionEvent'];
 
 @Injectable({
   providedIn: 'root'
 })
 export class SttService {
+  static SpeechRecognition = window['SpeechRecognition'] || window['webkitSpeechRecognition'];
+  static SpeechGrammarList = window['SpeechGrammarList'] || window['webkitSpeechGrammarList'];
+  static SpeechRecognitionEvent =window[' SpeechRecognitionEvent'] || window['webkitSpeechRecognitionEvent'];
   colors: string[] = [ 'aqua' , 'azure' , 'beige', 'bisque', 'black', 'blue', 'brown', 'chocolate', 'coral' ];
   grammar: string
   recognition: SpeechRecognition
@@ -16,8 +16,8 @@ export class SttService {
   constructor() {
     // I'm fucking LOVE this IDE
     this.grammar = `#JSGF V1.0; grammar colors; public <color> = ${this.colors.join(' | ')} ;`;
-    this.recognition = new SpeechRecognition();
-    this.speechRecognitionList = new SpeechGrammarList();
+    this.recognition = new SttService.SpeechRecognition();
+    this.speechRecognitionList = new SttService.SpeechGrammarList();
     this.speechRecognitionList.addFromString(this.grammar);
   }
 
