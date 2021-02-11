@@ -41,7 +41,7 @@ export class CliComponent implements OnInit {
 
   onCommandChar($event) {
     if (this.input && this.input.length) {
-      // todo run command
+      // todo refactor this shit!
       const itIsAQuestion = this.input.split('').find(char => char === '?');
       try {
         if (itIsAQuestion) {

@@ -30,4 +30,6 @@ describe('CliComponent', () => {
     component.onCommandChar(new Event('keyboard'));
     expect(true).toBeTruthy(); // should open cacl.exe how can I check it?!!
   });
+
+  
 });

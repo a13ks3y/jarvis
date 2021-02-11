@@ -14,10 +14,10 @@ export class SttService {
   private speechRecognitionList: SpeechGrammarList;
 
   constructor() {
-    // I'm fucking LOVE this IDE
     this.grammar = `#JSGF V1.0; grammar colors; public <color> = ${this.colors.join(' | ')} ;`;
     this.recognition = new SttService.SpeechRecognition();
     this.speechRecognitionList = new SttService.SpeechGrammarList();
+    // probably this is the reason why chorme tell about "without user interaction" shit @todo: check it
     this.speechRecognitionList.addFromString(this.grammar);
   }
 
