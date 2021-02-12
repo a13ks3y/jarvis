@@ -22,8 +22,10 @@ export class SttService {
   }
 
   start() {
+    this.recognition.addEventListener('result', ($event) => {
+      console.log('Something recognized!', $event.results);
+    });
     this.recognition.start();
-
   }
   stop() {
     this.recognition.stop();

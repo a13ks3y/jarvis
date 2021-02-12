@@ -1,5 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {TTSService} from "../tts.service";
+
+
 
 @Component({
   selector: 'the-cli',
@@ -8,7 +11,7 @@ import {HttpClient} from "@angular/common/http";
 })
 export class CliComponent implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private tts: TTSService) { }
   @Input()
   collapsed: boolean
   input: string;
@@ -24,7 +27,13 @@ export class CliComponent implements OnInit {
       'You entered:',
       'Can not perform:',
       'Command not found:'
-      ]
+      ],
+    doYouLikeIt: [
+      // This is just stupid, I need more advance way to script Jarvis answers...
+      // Some kind of script language, like Java, but wait... oh shit...
+      'Do you like it?',
+      'How do I look?',
+    ]
   }
 
 
@@ -55,7 +64,7 @@ export class CliComponent implements OnInit {
             location.href = '/' + secondWord;
           } else if (firstWord.includes('say')) {
             // todo use text to speech if it's possible, show pop-up if it's not.
-            alert(restOfWords);
+            this.tts.say(restOfWords);
           } else if (firstWord.includes('google')) {
             const url = `https://www.google.com/search?q=${restOfWords}&oq=${restOfWords}&ie=UTF-8`;
             const win = window.open(url, '_blank');
@@ -71,11 +80,28 @@ export class CliComponent implements OnInit {
               }
               this.input = '';
             });
+          } else if (firstWord === 'show' && secondWord === 'voices') {
+            this.tts.voices
+              .map((voice, index) => { return { index: index, lang: voice.lang, name: voice.name}})
+              .filter(voice => voice.lang.includes('en') || voice.lang.includes('ru') )
+              .forEach((voice, index) => {
+                this.output.push(`${voice.index} ${voice.name}`);
+              });
+          } else if (firstWord === 'use' && secondWord === 'voice') {
+            const voiceIndex = parseInt(restOfWords[0]);
+            this.tts.currentVoiceIndex = voiceIndex;
+            const currentVoice = this.tts.currentVoice || { name: 'UNKNOWN SHIT'};
+            this.output.push(`Current voice is set to ${currentVoice.name}`);
+            this.tts.tell([
+              `Current voice is set to ${currentVoice.name}`,
+               this.randomPhrase(this.basicDictionary.doYouLikeIt)
+            ], 333);
           } else {
             throw new Error('Not Implemented');
           }
         }
       } catch(e) {
+        console.error(e);
         this.output.push(`${this.randomPhrase(this.basicDictionary.youEntered)} "${this.input}"`);
         this.output.push(this.randomPhrase(this.basicDictionary.doNotKnowHowToDoIt));
       }

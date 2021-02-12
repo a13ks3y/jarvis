@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {TTSService} from "./tts.service";
+import {SttService} from "./stt.service";
 
 @Component({
   selector: 'the-root',
@@ -8,7 +10,8 @@ import {Component, OnInit} from '@angular/core';
 export class AppComponent implements OnInit  {
   title = 'jarvis';
   rgb = { r: 0, g: 0, b: 0 }
-  private voices: SpeechSynthesisVoice[];
+  constructor(private tts: TTSService, private stt: SttService) {
+  }
   ngOnInit() {
     // todo use requestAnimationFrame
     let isGoingUp = true;
@@ -33,7 +36,6 @@ export class AppComponent implements OnInit  {
 
     }, 66.6);
 
-    this.populateVoiceList();
     if (localStorage.getItem('greeted') === 'true') {
       // todo clear 'greeted' localStorage key on next day!
     } else {
@@ -44,28 +46,38 @@ export class AppComponent implements OnInit  {
       } else if (now.getHours() > 11 && now.getHours() <= 22) {
         timeOfDay = 'day';
       }
-      this.say(`Good ${timeOfDay}, Sir!`);
+      this.tts.say(`Good ${timeOfDay}, Sir!`);
       localStorage.setItem('greeted', 'true');
     }
   }
-   populateVoiceList() {
-     this.voices = speechSynthesis.getVoices();
-     console.log('voices:', this.voices);
+
+  private _listening: boolean;
+
+  startListen() {
+    // @todo: use random phrase (move dict and helpers from cli component to service)
+    document.body.style.backgroundColor = 'black';
+    this.tts.say(`I'm listening`).then(r => {
+      this._listening = true;
+      document.body.style.backgroundColor = 'green';
+      this.stt.start();
+      setTimeout(() => {
+        // @todo: use random phrase (move dict and helpers from cli component to service)
+        this.tts.say('Could not hear well from you.');
+        this.stopListen();
+      }, 6666 * 3); // ~ 6 minutes
+    });
   }
-  say(phrase: string) {
-    let synth = window.speechSynthesis;
-    const utterThis = new SpeechSynthesisUtterance(phrase);
-    utterThis.onend = function (event) {
-      // @todo free resources?
-    }
-    utterThis.onerror = function (event) {
-      console.error('SpeechSynthesisUtterance.onerror');
-    }
-    utterThis.voice = this.voices[11];
 
-    utterThis.pitch = 0.999;
-    utterThis.rate = 1;
-    synth.speak(utterThis);
+  stopListen() {
+    this._listening = false;
+    document.body.style.backgroundColor = 'black';
+    this.stt.stop();
+  }
 
+  wrapperTouchStart($event: TouchEvent) {
+  }
+
+  wrapperTouchEnd($event: TouchEvent) {
+    if (!this._listening) this.startListen();
   }
 }

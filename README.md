@@ -11,6 +11,11 @@ Don't install it.
 ## Road-map
 @todo encrypted items? (why not?)
 
+How to manage and controll different nodes? If I want Jarvis to greet someone in livenroom (where laptop is placed) he
+should use thouse speekers instead of speekers on my phone. Probably some-kind of tabs-kindof interface, like same
+controls, but diffrent tabs - different devices. It should be realy flexyble, I think it could be any combination of
+controlls that should/would/need/want/possible/imposible on different devices, that volumes could cross/not cross etc.
+
 # Angular-Generated 💩
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.3.
 
