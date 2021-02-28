@@ -9,13 +9,15 @@ import { CliComponent } from './cli/cli.component';
 import { HomeComponent } from './home/home.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthInterceptor} from "./auth.service";
+import { NodesComponent } from './nodes/nodes.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     XorComponent,
     CliComponent,
-    HomeComponent
+    HomeComponent,
+    NodesComponent
   ],
     imports: [
         BrowserModule,
