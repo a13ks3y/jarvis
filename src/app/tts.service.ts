@@ -13,14 +13,14 @@ export class TTSService {
     }
     this._currentVoiceIndex = value;
   }
-  private _currentVoiceIndex: number;
+  private _currentVoiceIndex: number = 0;
   get voices(): SpeechSynthesisVoice[] {
     if (!this._voices || !this._voices.length) {
       this.populateVoiceList();
     }
     return this._voices;
   }
-  private _voices: SpeechSynthesisVoice[];
+  private _voices: SpeechSynthesisVoice[] = [];
 
   constructor() {
     speechSynthesis.getVoices();
