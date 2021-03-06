@@ -31,7 +31,6 @@ export class TTSService {
   }
   populateVoiceList() {
     this._voices = speechSynthesis.getVoices();
-    console.log('voices:', this._voices);
   }
 
   async say(phrase: string) {

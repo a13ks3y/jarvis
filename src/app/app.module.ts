@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthInterceptor} from "./auth.service";
 import { NodesComponent } from './nodes/nodes.component';
+import { MindComponent } from './mind/mind.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { NodesComponent } from './nodes/nodes.component';
     XorComponent,
     CliComponent,
     HomeComponent,
-    NodesComponent
+    NodesComponent,
+    MindComponent
   ],
     imports: [
         BrowserModule,

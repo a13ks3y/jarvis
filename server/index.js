@@ -17,6 +17,8 @@ app.all('/*', function(req, res, next) {
   next();
 });
 
+// @todo: figure-out how to break throgh NAT
+
 // Function to handle the /run path
 app.get('/run', async function(req, res) {
   const command = req.query.cmd; // NEVER, EVER, EVER DO NOT DO LIKE THIS!!!
@@ -25,6 +27,13 @@ app.get('/run', async function(req, res) {
     console.log('cmd', command, 'executed');
     res.send(JSON.stringify({ result: stdout.toString('utf-8') }));
   });
+});
+
+app.get('/nodes/count', function(req, res) {
+  // @todo: send actual nodes count
+  res.send(JSON.stringify({
+    result: 1
+  }));
 });
 
 let server = app.listen(420, function() {

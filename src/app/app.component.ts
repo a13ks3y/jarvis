@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {TTSService} from "./tts.service";
 import {SttService} from "./stt.service";
+import { UtilsService } from './utils.service';
 
 @Component({
   selector: 'the-root',
@@ -10,7 +11,7 @@ import {SttService} from "./stt.service";
 export class AppComponent implements OnInit  {
   title = 'jarvis';
   rgb = { r: 0, g: 0, b: 0 }
-  constructor(private tts: TTSService, private stt: SttService) {
+  constructor(private tts: TTSService, private stt: SttService, private utils: UtilsService) {
   }
   ngOnInit() {
     // todo use requestAnimationFrame
@@ -80,4 +81,19 @@ export class AppComponent implements OnInit  {
   wrapperTouchEnd($event: TouchEvent) {
     if (!this._listening) this.startListen();
   }
+
+  @HostListener('document:mousemove', ['$event'])
+  onMouseMove(e: MouseEvent) {
+    const cp = this.utils.cp;
+    cp.ox = e.offsetX;
+    cp.oy = e.offsetY;
+    cp.cx = e.clientX;
+    cp.cy = e.clientY;
+    const scx = ~~(window.screen.availWidth / 2);
+    const scy = ~~(window.screen.availHeight / 2);
+    const dx = Math.abs(cp.cx - scx);
+    const dy = Math.abs(cp.cy - scy);
+    cp.dtc = Math.sqrt(dx**2 + dy**2);
+  }
+
 }
