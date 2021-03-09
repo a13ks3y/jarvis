@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MindComponent } from './mind/mind.component';
 import { NodesComponent } from './nodes/nodes.component';
-import {XorComponent} from "./xor/xor.component";
+import {XorComponent} from './xor/xor.component';
 
 const routes: Routes = [
   {
