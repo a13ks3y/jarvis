@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Xor} from "./xor";
+import {Xor} from './xor';
 
 @Component({
   selector: 'the-xor',
@@ -7,35 +7,49 @@ import {Xor} from "./xor";
   styleUrls: ['./xor.component.less']
 })
 export class XorComponent implements OnInit {
+  valueA = '';
+  valueB = '';
+  valueC = '';
+  inDecryptMode = false;
+  placeholderA = 'Text to encrypt';
+  placeholderB = 'Secret key';
+  placeholderC = 'Cypher';
 
   constructor() { }
-
-  txt: string
-  key: string;
-  cypher: string
-  inDecryptMode: boolean = false
 
   ngOnInit(): void {
   }
 
-  encrypt() {
-    this.cypher = Xor.xor(this.txt, this.key);
+  encrypt(): void {
+    this.valueC = Xor.xor(this.valueA, this.valueB);
   }
-  decrypt() {
-    this.txt = Xor.xor(this.cypher, this.key);
+  decrypt(): void {
+    this.valueA = Xor.xor(this.valueC, this.valueB);
   }
 
-  somethingChanged($event: Event) {
-    if (this.key) {
+  somethingChanged($event: Event): void {
+    if (this.valueB) {
       if (this.inDecryptMode) {
-        if (this.cypher && this.cypher.length === this.key.length) {
+        if (this.valueA && this.valueA.length === this.valueB.length) {
           this.decrypt();
           }
       } else {
-        if (this.txt) {
+        if (this.valueA) {
           this.encrypt();
         }
       }
+    }
+  }
+
+  inDecryptModeChecked(): void {
+    if (this.inDecryptMode) {
+      this.placeholderA = 'Text to encrypt';
+      this.placeholderB = 'Secret key';
+      this.placeholderC = 'Cypher';
+    } else {
+      this.placeholderA = 'Text to decrypt';
+      this.placeholderB = 'Secret key';
+      this.placeholderC = 'Result';
     }
   }
 }

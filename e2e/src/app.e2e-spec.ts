@@ -1,5 +1,5 @@
 import { AppPage } from './app.po';
-import { browser, logging } from 'protractor';
+import {$, browser, logging} from 'protractor';
 
 describe('workspace-project App', () => {
   let page: AppPage;
@@ -8,9 +8,16 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
-    page.navigateTo();
-    expect(page.getTitleText()).toEqual('jarvis app is running!');
+  it('should display / (cli) button', () => {
+    page.navigateTo().then(() => {
+      $('.cli-toggle').then(cliToggle => {
+        cliToggle.getText().then(result => {
+          console.log('RESULT:', result);
+          expect(result).toEqual('/');
+        });
+        // await expect(page.getTitleText()).toEqual('/');
+      });
+    });
   });
 
   afterEach(async () => {

@@ -1,6 +1,6 @@
 import {Component, HostListener, OnInit} from '@angular/core';
-import {TTSService} from "./tts.service";
-import {SttService} from "./stt.service";
+import {TTSService} from './tts.service';
+import {SttService} from './stt.service';
 import { UtilsService } from './utils.service';
 
 @Component({
@@ -9,11 +9,13 @@ import { UtilsService } from './utils.service';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent implements OnInit  {
-  title = 'jarvis';
-  rgb = { r: 0, g: 0, b: 0 }
   constructor(private tts: TTSService, private stt: SttService, private utils: UtilsService) {
   }
-  ngOnInit() {
+  title = 'jarvis';
+  rgb = { r: 0, g: 0, b: 0 };
+
+  private listening: boolean;
+  ngOnInit(): void {
     // todo use requestAnimationFrame
     let isGoingUp = true;
     setInterval(() => {
@@ -21,13 +23,13 @@ export class AppComponent implements OnInit  {
         this.rgb.r = this.rgb.r < 256 ? this.rgb.r + 1 : this.rgb.r;
         this.rgb.g = this.rgb.r >= 128 && this.rgb.g < 256 ? this.rgb.g + 1 : this.rgb.g;
         this.rgb.b = this.rgb.g >= 128 && this.rgb.b < 256 ? this.rgb.b + 1 : this.rgb.b;
-        if (this.rgb.b >= 255) isGoingUp = false;
+        if (this.rgb.b >= 255) { isGoingUp = false; }
       } else {
         this.rgb.r = this.rgb.r > 0 ? this.rgb.r - 1 : this.rgb.r;
         this.rgb.g = this.rgb.r <= 128 && this.rgb.g > 0 ? this.rgb.g - 1 : this.rgb.g;
         this.rgb.b = this.rgb.g <= 128 && this.rgb.b > 0 ? this.rgb.b - 1 : this.rgb.b;
 
-        if (this.rgb.b <= 0) isGoingUp = true;
+        if (this.rgb.b <= 0) { isGoingUp = true; }
 
       }
       const { r, g, b } = this.rgb;
@@ -36,7 +38,9 @@ export class AppComponent implements OnInit  {
 
 
     }, 66.6);
+  }
 
+  greet(): void {
     if (localStorage.getItem('greeted') === 'true') {
       // todo clear 'greeted' localStorage key on next day!
     } else {
@@ -52,13 +56,11 @@ export class AppComponent implements OnInit  {
     }
   }
 
-  private _listening: boolean;
-
-  startListen() {
+  startListen(): void {
     // @todo: use random phrase (move dict and helpers from cli component to service)
     document.body.style.backgroundColor = 'black';
     this.tts.say(`I'm listening`).then(r => {
-      this._listening = true;
+      this.listening = true;
       document.body.style.backgroundColor = 'green';
       this.stt.start();
       setTimeout(() => {
@@ -69,31 +71,31 @@ export class AppComponent implements OnInit  {
     });
   }
 
-  stopListen() {
-    this._listening = false;
+  stopListen(): void {
+    this.listening = false;
     document.body.style.backgroundColor = 'black';
     this.stt.stop();
   }
 
-  wrapperTouchStart($event: TouchEvent) {
+  wrapperTouchStart($event: TouchEvent): void {
   }
 
-  wrapperTouchEnd($event: TouchEvent) {
-    if (!this._listening) this.startListen();
+  wrapperTouchEnd($event: TouchEvent): void {
+    if (!this.listening) { this.startListen(); }
   }
 
   @HostListener('document:mousemove', ['$event'])
-  onMouseMove(e: MouseEvent) {
+  onMouseMove(e: MouseEvent): void {
     const cp = this.utils.cp;
     cp.ox = e.offsetX;
     cp.oy = e.offsetY;
     cp.cx = e.clientX;
     cp.cy = e.clientY;
-    const scx = ~~(window.screen.availWidth / 2);
-    const scy = ~~(window.screen.availHeight / 2);
+    const scx = Math.floor(window.screen.availWidth / 2);
+    const scy = Math.floor(window.screen.availHeight / 2);
     const dx = Math.abs(cp.cx - scx);
     const dy = Math.abs(cp.cy - scy);
-    cp.dtc = Math.sqrt(dx**2 + dy**2);
+    cp.dtc = Math.sqrt(dx ** 2 + dy ** 2);
   }
 
 }
