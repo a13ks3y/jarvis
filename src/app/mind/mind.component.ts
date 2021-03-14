@@ -71,7 +71,7 @@ export class MindComponent implements OnInit {
 
     const loader = new THREE.FontLoader();
 
-    loader.load( '/assets/Bitwise_Regular.json', ( font ) => {
+    loader.load( 'assets/Bitwise_Regular.json', ( font ) => {
       Word.fontOptions.font = font;
       this.me = new Word('me');
       this.me.add('you');
