@@ -23,7 +23,20 @@ export class SttService {
 
   start() {
     this.recognition.addEventListener('result', ($event) => {
-      console.log('Something recognized!', $event.results);
+      // $event.results is Array like object (SpeechRecognitionResultList)
+      const firstResult = $event.results[0];
+      const firstAlternative = firstResult[0];
+      const firstTranscript = firstAlternative.transcript.toLowerCase().trim();
+      console.log('Something recognized!', firstAlternative.transcript, 'Confidence:', firstAlternative.confidence);
+      switch (firstTranscript) {
+        case 'green': document.body.style.color = 'green'; break;
+        case 'red': document.body.style.color = 'red'; break;
+        case 'blue': document.body.style.color = 'blue'; break;
+        case 'yellow': document.body.style.color = '#f90'; break;
+        default:
+            console.error('unknown command!');
+          break;
+      }
     });
     this.recognition.start();
   }
