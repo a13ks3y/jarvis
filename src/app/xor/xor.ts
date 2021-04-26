@@ -5,4 +5,9 @@ export class Xor {
     // @ todo: rewrite this to not look like you was high as an Empire State Building !!!
     return (txt.split('').map((char, index) => char.charCodeAt(0) ^ key.charCodeAt(index)).join(''));
   }
+
+  static pipka(txt: string, key: string) {
+    // todo check txt string length should not be less than key!
+
+  }
 }
