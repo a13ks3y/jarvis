@@ -25,7 +25,4 @@ describe('MindComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should has root word (me)', () => {
-    expect(component.meIndex).toBeTruthy();
-  });
 });
