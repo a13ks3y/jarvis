@@ -11,6 +11,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthInterceptor} from "./auth.service";
 import { NodesComponent } from './nodes/nodes.component';
 import { MindComponent } from './mind/mind.component';
+import { CypherComponent } from './cypher/cypher.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { MindComponent } from './mind/mind.component';
     CliComponent,
     HomeComponent,
     NodesComponent,
-    MindComponent
+    MindComponent,
+    CypherComponent
   ],
     imports: [
         BrowserModule,

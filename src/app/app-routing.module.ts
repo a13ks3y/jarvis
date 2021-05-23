@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MindComponent } from './mind/mind.component';
 import { NodesComponent } from './nodes/nodes.component';
 import {XorComponent} from './xor/xor.component';
+import {CypherComponent} from "./cypher/cypher.component";
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'mind',
     component: MindComponent
+  },
+  {
+    path: 'cypher',
+    component: CypherComponent
   }
 ];
 
