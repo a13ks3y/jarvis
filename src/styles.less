@@ -13,6 +13,20 @@ body {
   height: 100%;
   overflow: hidden;
 }
+@keyframes BorderBooze {
+  0% {
+    border-top-left-radius: 1.666rem;
+    border-top-right-radius: 1.666rem;
+    border-bottom-left-radius: 0.666rem;
+    border-bottom-right-radius: 0.666rem;
+  }
+  75% {
+    border-top-left-radius: 0.666rem;
+    border-top-right-radius: 0.666rem;
+    border-bottom-left-radius: 1.666rem;
+    border-bottom-right-radius: 1.666rem;
+  }
+}
 
 .block {
   display: block;
@@ -25,6 +39,12 @@ body {
   min-height: 50%;
   border-top-left-radius: 1.666rem;
   border-top-right-radius: 1.666rem;
+  border-bottom-left-radius: 0.666rem;
+  border-bottom-right-radius: 0.666rem;
+  animation-name: BorderBooze;
+  animation-duration: 6.66s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
 }
 h1, h2, h3, h4, h5, h6 {
   color: white;
@@ -81,4 +101,13 @@ textarea {
 /* HELPERS */
 .hidden {
   display: none;
+}
+
+.debug {
+  h4, h5 {
+    font-size: 50%;
+  }
+  .value, .name {
+    font-size: 42%;
+  }
 }

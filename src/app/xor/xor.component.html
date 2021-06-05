@@ -1,9 +1,28 @@
 <div class="xor-component block">
-  <label for="xor-mode">
-    Decrypt:
-    <input id="xor-mode" type="checkbox" [(ngModel)]="inDecryptMode" (change)="inDecryptModeChecked()"/>
-  </label>
-  <input type="text" [placeholder]="placeholderA" [(ngModel)]="valueA" (ngModelChange)="somethingChanged($event)"/>
-  <input type="text" [placeholder]="placeholderB" [(ngModel)]="valueB" (ngModelChange)="somethingChanged($event)" />
-  <input type="text" [placeholder]="placeholderC" [(ngModel)]="valueC" (ngModelChange)="somethingChanged($event)" />
+  <h3>Even more powerful cypher</h3>
+  <input type="password" placeholder="Password" [(ngModel)]="password"/>
+  <textarea cols="66" rows="16" placeholder="Secret" [(ngModel)]="secret"></textarea>
+  <div class="debug hidden">
+    <h4>Debug info:</h4>
+    <p>
+      <span class="name">MD5:</span><span class="value">{{megaKey.md5}}</span>
+    </p>
+    <p>
+      <span class="name">Base64:</span><span class="value">{{megaKey.base64}}</span>
+    </p>
+    <p>
+      <span class="name">md5Base64:</span><span class="value">{{megaKey.md5Base64}}</span>
+    </p>
+    <p>
+      <span class="name">key:</span><span class="value">{{megaKey.key}}</span>
+    </p>
+    <p>
+      <span class="name">md5Key:</span><span class="value">{{megaKey.md5Key}}</span>
+    </p>
+  </div>
+  <div class="row">
+    <button class="btn btn-encrypt" (click)="doEncrypt()">Encrypt</button>
+    <button class="btn btn-decrypt" (click)="doDecrypt()">Decrypt</button>
+  </div>
+  <pre>{{result}}</pre>
 </div>

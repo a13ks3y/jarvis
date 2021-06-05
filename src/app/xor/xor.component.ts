@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {Xor} from './xor';
+import {Component, OnInit} from '@angular/core';
+import {MegaKey} from "./megaKey";
 
 @Component({
   selector: 'the-xor',
@@ -7,49 +7,71 @@ import {Xor} from './xor';
   styleUrls: ['./xor.component.less']
 })
 export class XorComponent implements OnInit {
-  valueA = '';
-  valueB = '';
-  valueC = '';
-  inDecryptMode = false;
-  placeholderA = 'Text to encrypt';
-  placeholderB = 'Secret key';
-  placeholderC = 'Cypher';
+  result: string = '';
+  megaKey: MegaKey = new MegaKey('');
+  password: string;
+  secret: string;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  encrypt(): void {
-    this.valueC = Xor.xor(this.valueA, this.valueB);
-  }
-  decrypt(): void {
-    this.valueA = Xor.xor(this.valueC, this.valueB);
+  doEncrypt() {
+    this.result = this.encrypt(this.password, this.secret);
   }
 
-  somethingChanged($event: Event): void {
-    if (this.valueB) {
-      if (this.inDecryptMode) {
-        if (this.valueA && this.valueA.length === this.valueB.length) {
-          this.decrypt();
-          }
-      } else {
-        if (this.valueA) {
-          this.encrypt();
-        }
-      }
-    }
+  encrypt(password: string, secret: string):string {
+    this.megaKey = new MegaKey(password);
+    const secretBase64 = btoa(secret);
+    const keyChars = this.megaKey.md5Key.split('');
+    let currentKey = 0;
+    const nextChars = this.megaKey.md5Base64.split('').reverse().map(char => {
+      const charCode = char.charCodeAt(0);
+      const keyCode = keyChars[currentKey].charCodeAt(0);
+      currentKey = currentKey >= keyChars.length ? 0 : currentKey + 1;
+      return String.fromCharCode(charCode ^ keyCode);
+    });
+    let currentNextChar = 0;
+    const cypher = secretBase64.split('').map(char => {
+      const nextChar = nextChars[currentNextChar];
+      const charCode = char.charCodeAt(0);
+      const nextCharCode = nextChar.charCodeAt(0);
+      currentNextChar = currentNextChar >= nextChars.length ? 0 : currentNextChar + 1;
+      return String.fromCharCode(charCode ^ nextCharCode);
+    });
+    const cypherBase64 = btoa(cypher.join(''));
+    return cypherBase64;
   }
 
-  inDecryptModeChecked(): void {
-    if (this.inDecryptMode) {
-      this.placeholderA = 'Text to encrypt';
-      this.placeholderB = 'Secret key';
-      this.placeholderC = 'Cypher';
-    } else {
-      this.placeholderA = 'Text to decrypt';
-      this.placeholderB = 'Secret key';
-      this.placeholderC = 'Result';
+  decrypt(password: string, encryptedSecret: string): string {
+    this.megaKey = new MegaKey(password);
+    const encryptedSecretChars = atob(encryptedSecret).split('');
+    const keyChars = this.megaKey.md5Key.split('');
+    let currentKey = 0;
+    const nextChars = this.megaKey.md5Base64.split('').reverse().map(char => {
+      const charCode = char.charCodeAt(0);
+      const keyCode = keyChars[currentKey].charCodeAt(0);
+      currentKey = currentKey >= keyChars.length ? 0 : currentKey + 1;
+      return String.fromCharCode(charCode ^ keyCode);
+    });
+    let currentNextChar = 0;
+    const secretBase64 = encryptedSecretChars.map(char => {
+      const charCode = char.charCodeAt(0);
+      const nexCharCode = nextChars[currentNextChar].charCodeAt(0);
+      currentNextChar = currentNextChar >= nextChars.length ? 0 : currentNextChar + 1;
+      return String.fromCharCode(charCode ^ nexCharCode);
+    }).join('');
+
+    return atob(secretBase64);
+  }
+
+  doDecrypt() {
+    try {
+      this.result = this.decrypt(this.password, this.secret);
+    } catch (e) {
+      alert('Probably wrong password!');
+      console.error(e);
     }
   }
 }
