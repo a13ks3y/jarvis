@@ -12,6 +12,7 @@ import {AuthInterceptor} from "./auth.service";
 import { NodesComponent } from './nodes/nodes.component';
 import { MindComponent } from './mind/mind.component';
 import { CypherComponent } from './cypher/cypher.component';
+import { ElementsComponent } from './elements/elements.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { CypherComponent } from './cypher/cypher.component';
     HomeComponent,
     NodesComponent,
     MindComponent,
-    CypherComponent
+    CypherComponent,
+    ElementsComponent
   ],
     imports: [
         BrowserModule,

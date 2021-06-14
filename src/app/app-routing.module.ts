@@ -4,8 +4,13 @@ import { MindComponent } from './mind/mind.component';
 import { NodesComponent } from './nodes/nodes.component';
 import {XorComponent} from './xor/xor.component';
 import {CypherComponent} from "./cypher/cypher.component";
+import {ElementsComponent} from "./elements/elements.component";
 
 const routes: Routes = [
+  {
+    path: 'elements',
+    component: ElementsComponent
+  },
   {
     path: 'xor',
     component: XorComponent
