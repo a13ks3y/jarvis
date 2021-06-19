@@ -1,1 +1,16 @@
-<p>duality works!</p>
+<div class="block block-delay-0">
+  <h3>DUALITY!!!</h3>
+  <div>
+    <input name="real-password" type="password" placeholder="REAL password" [(ngModel)]="realPassword"/>
+    <input name="fake-password" type="password" placeholder="FAKE password" [(ngModel)]="fakePassword"/>
+
+    <textarea name="real-secret" cols="33" rows="6" placeholder="REAL secret" [(ngModel)]="realSecret"></textarea>
+    <textarea name="fake-secret" cols="33" rows="6" placeholder="FAKE secret" [(ngModel)]="fakeSecret"></textarea>
+    <textarea name="result" cols="33" rows="6" placeholder="RESULT" disabled [(ngModel)]="result"></textarea>
+    <!--    @Todo: "Select all" and "Select all and Copy to ClipBoard" buttons -->
+    <div class="block block-delay-1">
+      <button name="encrypt-button" [disabled]="!isValid()">Encrypt</button>
+      <button name="decrypt-button" [disabled]="!isValid()">Decrypt</button>
+    </div>
+  </div>
+</div>

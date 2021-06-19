@@ -76,8 +76,10 @@ export class MindComponent implements OnInit {
       this.me = new Word('me');
       this.me.add('you');
       this.me.add('they');
-      this.me.add('YES');
+      this.me.add('yes');
       this.me.add('no');
+      this.me.add('true');
+      this.me.add('false');
       let rotation = 0;
       let direction = 1;
       const camera = this.three.camera;
