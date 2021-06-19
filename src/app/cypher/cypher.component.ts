@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {Md5 as md5 } from 'ts-md5';
-import ENGLISH_WORDS  from '../words_dictionary';
-import {by} from "protractor";
-import {first} from "rxjs/operators";
+import {Component, OnInit} from '@angular/core';
+import {Md5 as md5} from 'ts-md5';
+import ENGLISH_WORDS from '../words_dictionary';
+
 @Component({
   selector: 'the-cypher',
   templateUrl: './cypher.component.html',
@@ -12,8 +11,8 @@ export class CypherComponent implements OnInit {
 
   words: any = ENGLISH_WORDS;
   wordsArray: string[] = [];
-  encryptFlag: boolean = true;
-  result: string = '';
+  encryptFlag = true;
+  result = '';
   password: string;
   secret: string;
 
@@ -24,7 +23,7 @@ export class CypherComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  buttonClickHandler() {
+  buttonClickHandler(): void {
     if (this.encryptFlag) {
       this.result = this.encrypt(this.password, this.secret);
     } else {
@@ -32,14 +31,14 @@ export class CypherComponent implements OnInit {
     }
   }
 
-  getQuads(md5Hash: string):string[] {
+  getQuads(md5Hash: string): string[] {
     const passwordHashQuads = [];
     md5Hash.split('').forEach(char => {
       let byte = char.charCodeAt(0).toString(2);
       // Add leading zero if need
       if (byte.length < 8) {
         const missingZerosCount = 8 - byte.length;
-        for (let i =0; i<missingZerosCount; i++) {
+        for (let i = 0; i < missingZerosCount; i++) {
           byte = '0' + byte;
         }
       }
@@ -51,7 +50,7 @@ export class CypherComponent implements OnInit {
     return passwordHashQuads;
   }
 
-  encrypt(password, secret) {
+  encrypt(password, secret): string {
     // todo: randomize wordsArray dictionary
     this.wordsArray = this.wordsArray.sort(() => Math.random() * -0.5);
     secret = secret.replace(/[\s]/g, 'space');
@@ -65,13 +64,12 @@ export class CypherComponent implements OnInit {
       const reverseFlag = quad[0] === '1';
       const index = parseInt(triple, 2);
       quadIndex = quadIndex < 64 ? quadIndex + 1 : 0;
-      const word = this.wordsArray.find(word => word.charAt(reverseFlag ? -index: index) === char);
-      return word;
+      return this.wordsArray.find((word) => word.charAt(reverseFlag ? -index : index) === char);
     });
     return cypherWords.join(' ');
   }
 
-  decrypt(password: string, cypher: string) {
+  decrypt(password: string, cypher: string): string {
     const passwordHash = md5.hashAsciiStr(password);
     const passwordHashQuads = this.getQuads(passwordHash);
     let quadIndex = 0;
@@ -81,10 +79,8 @@ export class CypherComponent implements OnInit {
       const index = parseInt(triple, 2);
       const reverseFlag = quad[0] === '1';
       quadIndex = quadIndex < 64 ? quadIndex + 1 : 0;
-      const char = word.charAt(reverseFlag ? -index : index);
-      return char;
+      return word.charAt(reverseFlag ? -index : index);
     });
-    const result = secretChars.join('').replace(/space/g, ' ');
-    return result;
+    return secretChars.join('').replace(/space/g, ' ');
   }
 }
