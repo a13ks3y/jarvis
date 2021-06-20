@@ -51,8 +51,9 @@ export class AppComponent implements OnInit  {
       } else if (now.getHours() > 11 && now.getHours() <= 22) {
         timeOfDay = 'day';
       }
-      this.tts.say(`Good ${timeOfDay}, Sir!`);
-      localStorage.setItem('greeted', 'true');
+      this.tts.say(`Good ${timeOfDay}, Sir!`).then(() => {
+        localStorage.setItem('greeted', 'true');
+      });
     }
   }
 
