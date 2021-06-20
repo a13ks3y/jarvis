@@ -9,12 +9,15 @@ Don't use it.
 Don't install it.
 
 ## Road-map
-@todo encrypted items? (why not?)
+- encrypted private information (like passwords, photos, etc)
+- reduce bundle size, optimize words part (using some sort of distributed data-base?)
 
-How to manage and controll different nodes? If I want Jarvis to greet someone in livenroom (where laptop is placed) he
-should use thouse speekers instead of speekers on my phone. Probably some-kind of tabs-kindof interface, like same
-controls, but diffrent tabs - different devices. It should be realy flexyble, I think it could be any combination of
-controlls that should/would/need/want/possible/imposible on different devices, that volumes could cross/not cross etc.
+
+### Insights 
+How to manage and control different nodes? In scenario where Jarvis greet someone in living-room (where laptop placed) he
+should use those speakers instead of speakers on my phone. Probably some-kind of tabs-kind-of interface, like same
+controls, but different tabs - different devices. It should be really flexible, I think it could be any combination of
+controls that should/would/need/want/possible/impossible on different devices, that volumes could cross/not cross etc.
 
 # Angular-Generated 💩
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.3.

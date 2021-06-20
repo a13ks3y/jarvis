@@ -1,4 +1,8 @@
 # CHANGELOG
+## version 0.0.3
+- add md5-over-hashing white-noise generator 
+- duality crypto-algorithm implementation (in progress) 
+- update building configuration (still not perfect)
 ## version 0.0.2
 - fix e2e tests
 - add e2e test for duality component
