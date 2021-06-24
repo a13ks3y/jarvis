@@ -8,8 +8,9 @@ class Word {
     this.value = value;
     console.log(value);
     this.mesh = new THREE.Mesh(Word.geometry, Word.material);
-    this.mesh.position.x += Math.sin(Word.counter) * 9;
-    this.mesh.position.y += Math.cos(Word.counter ) * 3;
+    this.mesh.position.x += Math.sin(Word.counter) * 9.666;
+    this.mesh.position.y += Math.cos(Word.counter ) * 6.66;
+    this.mesh.position.z += Math.atan(Word.counter) * 3.666;
     const fontGeometry = new THREE.TextGeometry(this.value, Word.fontOptions);
 
     this.valueMesh = new THREE.Mesh(fontGeometry, Word.valueMaterial);
