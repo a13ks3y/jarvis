@@ -9,7 +9,7 @@ import { UtilsService } from './utils.service';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent implements OnInit  {
-  constructor(private tts: TTSService, private stt: SttService, private utils: UtilsService) {
+  constructor(private tts: TTSService, private stt: SttService, public utils: UtilsService) {
   }
   title = 'jarvis';
   rgb = { r: 0, g: 0, b: 0 };
@@ -92,6 +92,8 @@ export class AppComponent implements OnInit  {
     cp.oy = e.offsetY;
     cp.cx = e.clientX;
     cp.cy = e.clientY;
+    cp.px = e.pageX;
+    cp.py = e.pageY;
     const scx = Math.floor(window.screen.availWidth / 2);
     const scy = Math.floor(window.screen.availHeight / 2);
     const dx = Math.abs(cp.cx - scx);

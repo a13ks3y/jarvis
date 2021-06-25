@@ -36,12 +36,29 @@
       <line class="pipka pipka-2 pipka-2__1" x1="300" y1="50" x2="400" y2="-125" stroke-width="1" stroke="rgb(0,255,0)"/>
       <line class="pipka pipka-2 pipka-3__0" x1="328" y1="0" x2="600" y2="0" stroke-width="1" stroke="rgb(0,255,0)"/>
     </svg>
-
   </div>
 </div>
 <div class="wrapper" (touchend)="wrapperTouchEnd($event)" (touchstart)="wrapperTouchEnd($event)">
+  <svg class="crosshair">
+    <line
+      stroke="white"
+      [attr.x1]="utils.cp.px"
+      [attr.x2]="utils.cp.px"
+      y1="0"
+      y2="100%"
+      stroke-width="1"></line>
+    <line
+      stroke="white"
+      [attr.y1]="utils.cp.py"
+      [attr.y2]="utils.cp.py"
+      x1="0"
+      x2="100%"
+      stroke-width="1"></line>
+  </svg>
   <the-cli [collapsed]="true"></the-cli>
   <div class="main-wrapper">
     <router-outlet></router-outlet>
+
   </div>
 </div>
+

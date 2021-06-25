@@ -1,16 +1,19 @@
 import { HostListener, Injectable } from '@angular/core';
 interface MousePosition {
-  ox: number
-  oy: number
-  cx: number
-  cy: number
-  dtc: number // distance to (screen) center
+  px: number;
+  py: number;
+  ox: number;
+  oy: number;
+  cx: number;
+  cy: number;
+  dtc: number; // distance to (screen) center
 }
 @Injectable({
   providedIn: 'root'
 })
 export class UtilsService {
   public cp: MousePosition = {
+    px: 0, py: 0,
     ox: 0,
     oy: 0,
     cx: 0,
@@ -18,6 +21,6 @@ export class UtilsService {
     dtc: 0 // distance to (screen) center
   }
 
-  constructor() { 
+  constructor() {
   }
 }
