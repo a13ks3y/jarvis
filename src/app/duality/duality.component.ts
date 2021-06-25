@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Duality } from './duality';
 @Component({
   selector: 'the-duality',
   templateUrl: './duality.component.html',
@@ -22,6 +22,12 @@ export class DualityComponent implements OnInit {
       this.fakePassword && this.fakePassword.length &&
       this.realSecret && this.realSecret.length &&
       this.fakeSecret && this.fakeSecret.length);
+  }
+
+  encrypt() {
+    if (this.isValid()) {
+      Duality.encrypt(this.realSecret, this.fakeSecret, this.realPassword);
+    }
   }
 
 }
