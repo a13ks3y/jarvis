@@ -11,7 +11,7 @@ Don't use it.
 Don't install it.
 
 ## Road-map
-
+- Rearrange server and client code (maek ntestjs app, docs as root for client and move client root to the same (or other) folder)
 - Add wiki-auto-reading feature. Should look like screencast of random wiki articles browsing (random pieces text
   selections, mouse moves, unnecessary scrolling, following links (only wiki)).
   Selenium or any other solution.

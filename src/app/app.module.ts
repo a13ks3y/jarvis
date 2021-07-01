@@ -13,6 +13,7 @@ import { NodesComponent } from './nodes/nodes.component';
 import { MindComponent } from './mind/mind.component';
 import { CypherComponent } from './cypher/cypher.component';
 import { DualityComponent } from './duality/duality.component';
+import { MatrixComponent } from './matrix/matrix.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { DualityComponent } from './duality/duality.component';
     NodesComponent,
     MindComponent,
     CypherComponent,
-    DualityComponent
+    DualityComponent,
+    MatrixComponent
   ],
     imports: [
         BrowserModule,

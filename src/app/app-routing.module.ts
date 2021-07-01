@@ -5,8 +5,13 @@ import { NodesComponent } from './nodes/nodes.component';
 import {XorComponent} from './xor/xor.component';
 import {CypherComponent} from './cypher/cypher.component';
 import {DualityComponent} from './duality/duality.component';
+import { MatrixComponent } from './matrix/matrix.component';
 
 const routes: Routes = [
+  {
+    path: 'matrix',
+    component: MatrixComponent
+  },
   {
     path: 'duality',
     component: DualityComponent
