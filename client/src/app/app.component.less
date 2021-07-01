@@ -1,0 +1,147 @@
+.main-wrapper {
+  position: absolute;
+  max-width: 100vw;
+  min-width: 66.6vw;
+  z-index: 16;
+  padding: 1.666rem 3.666rem 1.666rem 1.333rem;
+  top: 6.66rem;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  //background-color: #214227;
+}
+.eye {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  background-image: url('/jarvis/assets/futuristic-eye_1280.webp'), radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,0.666) 66%, rgba(0,0,0,1) 100%);
+  background-repeat: no-repeat;
+  background-position: center;
+  //  why nex line 'cause artifacts?
+  //  background-position: 222px -300px; // @todo: why "center" doesn't work?
+  opacity: 0.666;
+}
+
+.pipka-holder {
+  border: none;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  height: 50%;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  // @todo: animations, transitions, etc.
+}
+@keyframes pipka-keyframes-0 {
+  0% {
+    margin-left: 0;
+    margin-top: 0;
+  }
+  50% {
+    margin-left: -10px;
+    margin-top: 10px;
+  }
+  75% {
+    margin-left: 10px;
+    margin-top: -10px;
+  }
+  100% {
+    margin-left: 0;
+    margin-top: 0;
+  }
+}
+@keyframes pipka-keyframes-1 {
+  0% {
+    margin-top: 0;
+    margin-left: 0;
+  }
+  50% {
+    margin-top: 10px;
+    margin-left: -10px;
+  }
+  75% {
+    margin-top: -10px;
+    margin-left: 10px;
+  }
+  100% {
+    margin-top: 0;
+    margin-left: 0;
+  }
+}
+@keyframes pipka-keyframes-2 {
+  0% {
+    margin-left: 0;
+    margin-top: 0;
+  }
+  50% {
+    margin-left: -10px;
+  }
+  75% {
+    margin-top: -10px;
+  }
+  100% {
+    margin-left: 0;
+    margin-top: 0;
+  }
+}
+@keyframes pipka-keyframes-3 {
+  0% {
+    margin-left: 0;
+    margin-top: 0;
+  }
+  50% {
+    margin-left: -10px;
+    margin-top: -10px;
+  }
+  75% {
+    margin-top: -20px;
+    margin-left: 5px;
+  }
+  100% {
+    margin-left: 0;
+    margin-top: 0;
+  }
+}
+.pipka-holder-0 {
+  animation-name: pipka-keyframes-0;
+  animation-duration: 7s;
+}
+.pipka-holder-1 {
+  left: 50%;
+  top: -30px;
+  transform: scaleY(-1);
+  animation-name: pipka-keyframes-1;
+  animation-duration: 4s;
+}
+.pipka-holder-2 {
+  left: 0;
+  top: calc(50% + 38px);
+  transform: scaleX(-1);
+  animation-name: pipka-keyframes-2;
+}
+.pipka-holder-3 {
+  animation-name: pipka-keyframes-3;
+  animation-duration: 8s;
+  left: -37px;
+  top: 28px;
+  transform: scale(-1, -1);
+}
+
+.crosshair {
+  // @todo: figure out how to make svg element transparent
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  line {
+    opacity: 0.666;
+    stroke: lime;
+    stroke-width: 1px;
+  }
+}

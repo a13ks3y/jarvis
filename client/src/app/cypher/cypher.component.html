@@ -1,0 +1,18 @@
+<div class="block">
+  <div class="row">
+    <h1>The Ultimate Unbreakable Crypto-Algorithm</h1>
+  </div>
+  <div class="row">
+    <input type="password" placeholder="password" [(ngModel)]="password"/>
+    <input type="text" placeholder="secret" [(ngModel)]="secret"/>
+  </div>
+  <div class="row">
+    <label>
+      <input type="checkbox" [(ngModel)]="encryptFlag"/>
+    </label>
+    <button (click)="buttonClickHandler()">{{encryptFlag ? 'Encrypt' : 'Decrypt' }}</button>
+  </div>
+  <div class="row">
+    <textarea name="result" id="result" cols="66" rows="256" [value]="result"></textarea>
+  </div>
+</div>

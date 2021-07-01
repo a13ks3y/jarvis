@@ -1,0 +1,140 @@
+@import "reset";
+@font-face {
+  font-family: 'Bitwise';
+  src: url('assets/Bitwise-m19x.ttf');
+}
+html {
+  font-size: 27px;
+}
+
+body {
+  background: black;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+@keyframes BorderBooze {
+  0% {
+    border-top-left-radius: 1.666rem;
+    border-top-right-radius: 1.666rem;
+    border-bottom-left-radius: 0.666rem;
+    border-bottom-right-radius: 0.666rem;
+  }
+  75% {
+    border-top-left-radius: 0.666rem;
+    border-top-right-radius: 0.666rem;
+    border-bottom-left-radius: 1.666rem;
+    border-bottom-right-radius: 1.666rem;
+  }
+}
+
+.block {
+  display: block;
+  background: black;
+  border: #202020 solid 0.666pt;
+  padding: 1.666rem 0.666rem;
+  text-align: center;
+  width: 66.6%;
+  margin: auto;
+  min-height: 50%;
+  border-top-left-radius: 1.666rem;
+  border-top-right-radius: 1.666rem;
+  border-bottom-left-radius: 0.666rem;
+  border-bottom-right-radius: 0.666rem;
+  animation-name: BorderBooze;
+  animation-duration: 6.66s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+.block-delay-0 {
+  animation-delay: 1.5s;
+}
+.block-delay-1 {
+  animation-delay: 270ms;
+}
+.block-delay-6 {
+  animation-delay: 666ms;
+}
+h1, h2, h3, h4, h5, h6 {
+  color: white;
+  text-shadow: 1px 1px #274221;
+}
+
+input[type=text], input[type=password] {
+  margin: 0 0.666rem;
+  padding: 0.333rem;
+  font-size: 0.666rem;
+  color: #21b456;
+  border: 3px solid #214227;
+  background: black;
+}
+
+input[type=checkbox] {
+  font-size: 0.666rem;
+  color: #21b456;
+  border: 3px solid #214227;
+  background: black;
+}
+button {
+  margin: 0 0.666rem;
+  padding: 0.333rem;
+  font-size: 0.666rem;
+  color: #21b456;
+  border: 2px solid #214227;
+  background: black;
+}
+label span {
+  margin: 0 0.666rem;
+  padding: 0.333rem;
+  font-size: 0.666rem;
+  color: #21b456;
+  text-shadow: 1px 1px black;
+}
+textarea {
+  margin-top: 0.666rem;
+  color: #21b456;
+  text-shadow: 1px 1px black;
+  background: transparent;
+}
+.wrapper {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 13px;
+  background-color: #abcdef;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px #bcdefa;
+  border-radius: 13px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #cdefab;
+  border-radius: 13px;
+}
+
+/* HELPERS */
+.hidden {
+  display: none;
+}
+
+.debug {
+  h4, h5 {
+    font-size: 50%;
+  }
+  .value, .name {
+    font-size: 42%;
+  }
+}
