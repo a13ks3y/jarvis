@@ -53,13 +53,6 @@ function waterfall (tasks){
     }
     return new Promise((resolve) => recurtion(resolve));    
 }
-function repeat(str, count) {
-    let arr = [];
-    for (let i = 0; i<count; i++) {
-        arr.push(str);
-    }
-    return arr;
-}
 async function main() {
     browser = await puppeteer.launch({
         executablePath: chromePath,
@@ -75,21 +68,23 @@ async function main() {
     async function quickLook(url) {     
         console.log('goto:', url);   
         await page.goto(url);
+        await page.evaluate(() => {
+            return new Promise(resolve => {
+                const headlines = Array.from(document.querySelectorAll('.mw-headline'))
+                    .sort((a, b) => { b.scrollHeight - a.scrollHeight});
+                headlines.forEach((headline, index) => {
+                    setTimeout(() => {
+                        headline.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                    }, 666 * (index + 6));
+                    
+                });
+                setTimeout(resolve, 666 * (headlines.length + 6));
+            });
+        });
         
-        return waterfall([
-            repeat('wait', 7),
-            repeat('scroll', 13),
-            repeat('scrollUp', 9)
-        ].flat().sort((a, b) => Math.floor(Math.random() * 2) - 1).map(command => {
-            console.log('evaluate command:', command);
-            switch(command) {
-                case 'wait': return () => page.waitForTimeout(666 * 2); break;
-                case 'scroll': return () => page.evaluate(() => { window.scrollBy(0, 666)}); break;
-                case 'scrollUp': return () => page.evaluate(() => { window.scrollBy(0, -666)}); break;
-                case 'close': return () =>  page.close();
-                default: return () => Promise.resolve();
-            }
-        }));                    
     }
 
 
