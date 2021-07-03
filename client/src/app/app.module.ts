@@ -14,6 +14,7 @@ import { MindComponent } from './mind/mind.component';
 import { CypherComponent } from './cypher/cypher.component';
 import { DualityComponent } from './duality/duality.component';
 import { MatrixComponent } from './matrix/matrix.component';
+import { YoutubeComponent } from './youtube/youtube.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { MatrixComponent } from './matrix/matrix.component';
     MindComponent,
     CypherComponent,
     DualityComponent,
-    MatrixComponent
+    MatrixComponent,
+    YoutubeComponent
   ],
     imports: [
         BrowserModule,

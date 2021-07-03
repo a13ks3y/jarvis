@@ -1,6 +1,7 @@
 # CHANGELOG
 ## version 0.0.4
 - add wiki script to scroll some random wiki pages (in progress)
+- replace default favicon
 ## version 0.0.3
 - add md5-over-hashing white-noise generator 
 - duality crypto-algorithm implementation (in progress) 
