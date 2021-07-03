@@ -6,8 +6,13 @@ import {XorComponent} from './xor/xor.component';
 import {CypherComponent} from './cypher/cypher.component';
 import {DualityComponent} from './duality/duality.component';
 import { MatrixComponent } from './matrix/matrix.component';
+import { YoutubeComponent } from './youtube/youtube.component';
 
 const routes: Routes = [
+  {
+    path: 'youtube',
+    component: YoutubeComponent
+  },
   {
     path: 'matrix',
     component: MatrixComponent
@@ -35,7 +40,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
+  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy', useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
