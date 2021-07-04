@@ -15,6 +15,7 @@ import { CypherComponent } from './cypher/cypher.component';
 import { DualityComponent } from './duality/duality.component';
 import { MatrixComponent } from './matrix/matrix.component';
 import { YoutubeComponent } from './youtube/youtube.component';
+import { WikiComponent } from './wiki/wiki.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { YoutubeComponent } from './youtube/youtube.component';
     CypherComponent,
     DualityComponent,
     MatrixComponent,
-    YoutubeComponent
+    YoutubeComponent,
+    WikiComponent
   ],
     imports: [
         BrowserModule,

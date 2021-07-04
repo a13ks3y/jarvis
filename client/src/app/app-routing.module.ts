@@ -7,8 +7,13 @@ import {CypherComponent} from './cypher/cypher.component';
 import {DualityComponent} from './duality/duality.component';
 import { MatrixComponent } from './matrix/matrix.component';
 import { YoutubeComponent } from './youtube/youtube.component';
+import { WikiComponent } from './wiki/wiki.component';
 
 const routes: Routes = [
+  {
+    path: 'wiki',
+    component: WikiComponent
+  },
   {
     path: 'youtube',
     component: YoutubeComponent

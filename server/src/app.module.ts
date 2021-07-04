@@ -4,6 +4,8 @@ import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { YoutubeController } from './youtube/youtube.controller';
+import { BrowserService } from './browser/browser.service';
+import { WikiController } from './wiki/wiki.controller';
 
 @Module({
   imports: [
@@ -13,7 +15,7 @@ import { YoutubeController } from './youtube/youtube.controller';
       exclude: ['/api*']
     })
   ],
-  controllers: [AppController, YoutubeController],
-  providers: [AppService],
+  controllers: [AppController, YoutubeController, WikiController],
+  providers: [AppService, BrowserService],
 })
 export class AppModule {}
