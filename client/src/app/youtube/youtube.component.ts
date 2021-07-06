@@ -11,7 +11,7 @@ export class YoutubeComponent implements OnInit {
   constructor(private http: HttpClient) { 
     const host = '192.168.1.66';
     const port = '3000';
-    this.apiBaseUrl = `http://${host}:${port}/api/youtube/`;
+    this.apiBaseUrl = `${location.protocol}//${host}:${port}/api/youtube/`;
   }
 
   ngOnInit(): void {
