@@ -1,16 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpRequest, JsonpClientBackend } from '@angular/common/http';
 @Component({
   selector: 'the-youtube',
   templateUrl: './youtube.component.html',
   styleUrls: ['./youtube.component.less']
 })
 export class YoutubeComponent implements OnInit {
-  browserOpened = false;
+  browserOpened: boolean = false;
   apiBaseUrl: string;
-  constructor(private http: HttpClient) { 
+  httpsOn: boolean = false;
+  constructor(private http: HttpClient, private jsonp: JsonpClientBackend) { 
     const host = '192.168.1.66';
     const port = '3000';
+    if (location.protocol === 'https:') {
+      this.httpsOn = true;
+    }
     this.apiBaseUrl = `${location.protocol}//${host}:${port}/api/youtube/`;
   }
 
@@ -19,6 +23,20 @@ export class YoutubeComponent implements OnInit {
     // @todo: should extend HttpClient?
     // @todo: consider using @ServerRequired decorator (create one)
   }
+  callFuckingApi(api: string) {
+    return new Promise<void>(resolve => {
+      const url = this.apiBaseUrl + api;
+      if (this.httpsOn) {
+        this.jsonp.handle(new HttpRequest('GET', url)).subscribe(() => {
+          resolve();
+        });
+      } else {
+        this.http.get(url).subscribe(() => {
+          resolve();
+        });  
+      }
+    });
+  }
   start(): void {
     // @todo: let user choose which node should run youtube
     if (this.browserOpened) {
@@ -26,30 +44,28 @@ export class YoutubeComponent implements OnInit {
       alert('Already started!');
       return;
     }
-    this.http.get(this.apiBaseUrl + 'start').toPromise().then(() => {
+    this.callFuckingApi('start').then(() => {
       this.browserOpened = true;
     });
   }
   stop(): void {
-    this.http.get(this.apiBaseUrl + 'stop').toPromise().then(() => {
+    this.callFuckingApi('stop').then(() => {
       this.browserOpened = false;
     });
   }
   play(): void {
-    this.http.get(this.apiBaseUrl + 'play').toPromise();
+    this.callFuckingApi('play');
   }
   pause() : void {
-    this.http.get(this.apiBaseUrl + 'pause').toPromise();
+    this.callFuckingApi('pause');
   }
   next() : void {
-    this.http.get(this.apiBaseUrl + 'next').toPromise();
+    this.callFuckingApi('next');
   }
   prev() : void {
-    this.http.get(this.apiBaseUrl + 'prev').toPromise();
+    this.callFuckingApi('perv');
   }
   toggleFullscreen() : void {
-    this.http.get(this.apiBaseUrl + 'toggleFullscreen').toPromise();
-  }
-
-  
+    this.callFuckingApi('toggleFullscreen');
+  }  
 }
