@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import * as puppeteer from 'puppeteer-core';
-const fs = require('fs');
+import fs from 'fs';
 
 @Injectable()
 export class BrowserService {

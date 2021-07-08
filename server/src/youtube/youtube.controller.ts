@@ -1,15 +1,11 @@
 import { Controller, Get, Param } from '@nestjs/common';
-// @todo: figure out why the "import" statement isn't working.
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const findChrome = require('chrome-finder');
-const chromePath = findChrome();
 import * as puppeteer from 'puppeteer-core';
-import { BrowserService } from 'src/browser/browser.service';
+import { BrowserService } from '../browser/browser.service';
     
 @Controller('youtube')
 export class YoutubeController {
     page: puppeteer.Page
-    constructor(private readonly browserService: BrowserService) {}
+    constructor(private browserService: BrowserService) {}
     @Get('start')
     async start() {
         const youtube = 'https://youtube.com';

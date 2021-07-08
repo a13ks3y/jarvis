@@ -13,7 +13,8 @@ import { WikiController } from './wiki/wiki.controller';
       rootPath: join(__dirname, '..', '..', 'docs'),
       serveRoot: '/jarvis/',
       exclude: ['/api*']
-    })
+    }),
+    BrowserService
   ],
   controllers: [AppController, YoutubeController, WikiController],
   providers: [AppService, BrowserService],

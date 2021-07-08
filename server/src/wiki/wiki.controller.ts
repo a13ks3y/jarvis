@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import * as puppeteer from 'puppeteer-core';
-import { BrowserService } from 'src/browser/browser.service';
+import { BrowserService } from './../browser/browser.service';
 
 @Controller('wiki')
 export class WikiController {
