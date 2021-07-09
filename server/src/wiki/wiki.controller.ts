@@ -27,6 +27,7 @@ export class WikiController {
                     (function recursion(element) {
                         const seeAlsoElement = document.getElementById('See_also');
                         setTimeout(() => {
+                            // @todo: consider use  html { scroll-behavior: smooth; } and window.scroll instead.
                             element.scrollIntoView({
                                 behavior: 'smooth',
                                 inline: 'center'
