@@ -10,9 +10,9 @@ export class YoutubeComponent implements OnInit {
   httpsOn: boolean = false;
   constructor(private http: HttpClient, private jsonp: JsonpClientBackend) {}
   getApiBaseUrl(protocol: string = null) {
-    const host = '192.168.1.66';
+    const host = location.hostname; //'192.168.1.66';
     const port = '3000';
-    if (location.protocol === 'https:') {
+    if (location.protocol === 'https:' || location.port !== port) {
       this.httpsOn = true;
     }
     return `${protocol || location.protocol}//${host}:${port}/api/youtube/`;
@@ -27,9 +27,19 @@ export class YoutubeComponent implements OnInit {
     return new Promise<void>(resolve => {
       // @todo: check if other orgin too. Probably just fall-back to JSONP if http didn't worked? Or use JSONP always?
       if (this.httpsOn) {
-        this.jsonp.handle(new HttpRequest('JSONP', this.getApiBaseUrl('http') + api)).subscribe(() => {
+        const script = document.createElement('img');        
+        script.src = this.getApiBaseUrl('http') + api;
+        
+        const resolveAndClean = (element) => {
           resolve();
-        });
+          document.body.removeChild(element);
+        }
+        script.onload = resolveAndClean;
+        script.onerror = resolveAndClean;
+        document.body.appendChild(script);
+        // this.jsonp.handle(new HttpRequest('JSONP', this.getApiBaseUrl('http') + api)).subscribe(() => {
+        //   resolve();
+        // });
       } else {
         this.http.get(this.getApiBaseUrl() + api).subscribe(() => {
           resolve();

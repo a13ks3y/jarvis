@@ -34,7 +34,7 @@ export class TTSService {
   }
 
   async say(phrase: string) {
-    const promise = new Promise((resolve, reject) => {
+    const promise = new Promise<void>((resolve, reject) => {
       let synth = window.speechSynthesis;
       const utterThis = new SpeechSynthesisUtterance(phrase);
       utterThis.onend = function (event) {
@@ -47,8 +47,8 @@ export class TTSService {
       }
       utterThis.voice = this._voices[this._currentVoiceIndex];
 
-      utterThis.pitch = 0.999;
-      utterThis.rate = 1;
+      utterThis.pitch = 0.666;
+      utterThis.rate = 0.666;
       synth.speak(utterThis);
     });
   }

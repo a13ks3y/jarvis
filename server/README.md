@@ -5,6 +5,9 @@
 ## Description
 Tbd.
 
+## Road-Map
+- return troll-face png for CORS requests instead of just 200.
+
 ## Installation
 
 ```bash

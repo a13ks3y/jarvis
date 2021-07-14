@@ -47,6 +47,21 @@ body {
   animation-iteration-count: infinite;
   animation-timing-function: ease-in-out;
 }
+.block:nth-child(1) {
+  animation-delay: 0.666s;
+}
+.block:nth-child(2) {
+  animation-delay: 6.66s;
+}
+.block:nth-child(3) {
+  animation-delay: 3.666s;
+}
+.block:nth-child(4) {
+  animation-delay: 7.666s;
+}
+.block:nth-child(5) {
+  animation-delay: 9.666s;
+}
 .block-delay-0 {
   animation-delay: 1.5s;
 }
@@ -87,6 +102,7 @@ button {
 button.square {
   width: 1.666rem;
   height: 1.666rem;
+  margin: auto;
 }
 button:hover {
   cursor: pointer;
@@ -112,6 +128,11 @@ textarea {
   top: 0;
   right: 0;
   bottom: 0;
+}
+.panel {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 /* width */
