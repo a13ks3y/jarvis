@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import * as puppeteer from 'puppeteer-core';
 import { exec } from 'child_process';
 const fs = require('fs');
+const fkill = require('fkill');
 
 @Injectable()
 export class BrowserService {
@@ -45,17 +46,26 @@ export class BrowserService {
         const result = new Promise<void>((resolve, reject) => {
             const port = '9222';
             const chromePath = require('chrome-finder')();
-            // @todo: cross-platform?
-            const cmd = `"${chromePath}" --remote-debugging-port=${port} --no-first-run --no-default-browser-check`;
-            console.log('cmd:', cmd);
-            exec(cmd, (err, result) => {
-                console.log('PIPKA!', err, result);
-                if (err) {
-                    reject();
-                } else {
-                    resolve();
-                }
-            });            
+            console.log('Chrome path is:', chromePath);
+            fkill('chrome').then(() => {
+                // @todo: cross-platform?
+                const args = [
+                    '--no-first-run',
+                    '--no-default-browser-check',
+                    '--allow-file-access-from-file',
+                    '--disable-web-security'
+                ].join(' ');
+                const cmd = `"${chromePath}" --remote-debugging-port=${port} ${args}`;
+                console.log('cmd:', cmd);
+                exec(cmd, (err, result) => {
+                    console.log('PIPKA!', err, result);
+                    if (err) {
+                        reject();
+                    } else {
+                        resolve();
+                    }
+                });            
+            });
         });
         return result;
     }
