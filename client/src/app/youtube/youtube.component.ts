@@ -100,19 +100,25 @@ export class YoutubeComponent implements OnInit {
     return new Promise<void>(resolve => {
       // @todo: check if other orgin too. Probably just fall-back to JSONP if http didn't worked? Or use JSONP always?
       if (this.httpsOn) {
-        const script = document.createElement('img');        
-        script.src = this.getApiBaseUrl('http') + api;
-        
-        const resolveAndClean = (element) => {
-          resolve();
-          document.body.removeChild(element);
+        try {
+          this.jsonp.handle(new HttpRequest('JSONP', this.getApiBaseUrl('http') + api)).subscribe(() => {
+            resolve();
+          });
+        } catch (e) {
+          console.error(e);
+          const script = document.createElement('img');        
+          script.src = this.getApiBaseUrl('http') + api;
+          
+          const resolveAndClean = (element) => {
+            resolve();
+            element.parentNode.removeChild(element);
+            //document.body.removeChild(element);
+          }
+          script.onload = resolveAndClean;
+          script.onerror = resolveAndClean;
+          document.body.appendChild(script);  
         }
-        script.onload = resolveAndClean;
-        script.onerror = resolveAndClean;
-        document.body.appendChild(script);
-        // this.jsonp.handle(new HttpRequest('JSONP', this.getApiBaseUrl('http') + api)).subscribe(() => {
-        //   resolve();
-        // });
+
       } else {
         this.http.get(this.getApiBaseUrl() + api).subscribe(() => {
           resolve();
