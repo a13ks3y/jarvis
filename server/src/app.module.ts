@@ -6,15 +6,16 @@ import { AppService } from './app.service';
 import { YoutubeController } from './youtube/youtube.controller';
 import { BrowserService } from './browser/browser.service';
 import { WikiController } from './wiki/wiki.controller';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
   imports: [
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', '..', 'docs'),
-      serveRoot: '/jarvis/',
-      exclude: ['/api*']
+      serveRoot: '/jarvis/',      
+      exclude: ['/api*', '/']
     }),
-    BrowserService
+    HttpModule,
   ],
   controllers: [AppController, YoutubeController, WikiController],
   providers: [AppService, BrowserService],
