@@ -3,7 +3,7 @@
   "version": "0.0.4",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --disable-host-check",
     "build": "ng build --prod && shx cp ../docs/index.html ../docs/404.html",
     "test": "ng test",
     "lint": "ng lint",

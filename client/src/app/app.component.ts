@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, HostListener, isDevMode, OnInit} from '@angular/core';
 import {TTSService} from './tts.service';
 import {SttService} from './stt.service';
 import { UtilsService } from './utils.service';
@@ -18,7 +18,7 @@ export class AppComponent implements OnInit  {
   ngOnInit(): void {
     // todo use requestAnimationFrame
     let isGoingUp = true;
-    setInterval(() => {
+    !isDevMode() && setInterval(() => {
       if (isGoingUp) {
         this.rgb.r = this.rgb.r < 256 ? this.rgb.r + 1 : this.rgb.r;
         this.rgb.g = this.rgb.r >= 128 && this.rgb.g < 256 ? this.rgb.g + 1 : this.rgb.g;
