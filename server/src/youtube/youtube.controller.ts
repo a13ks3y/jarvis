@@ -5,6 +5,7 @@ import { BrowserService } from '../browser/browser.service';
 @Controller('youtube')
 export class YoutubeController {
     page: puppeteer.Page = null;
+    paused = false;
     constructor(private browserService: BrowserService) {}
     @Get('start')
     async start() {
@@ -22,11 +23,23 @@ export class YoutubeController {
     }
     @Get('pause')
     async pause() {
-        if (this.page) await this.page.click('.ytp-play-button');
+        if (this.page) {
+            if (!this.paused) {
+                await this.page.click('.ytp-play-button');
+                this.paused = true;
+            }
+        }
     }
     @Get('play')
     async play() {
-       if (this.page) await this.page.click('.ytp-play-button');
+        if (this.page) {
+            if (!this.paused) {
+                await this.page.click('.ytp-play-button');
+                this.paused = false;
+                return true;
+            }    
+        }
+        return false;
     }
     @Get('next')
     async next() {

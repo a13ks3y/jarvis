@@ -23,9 +23,13 @@
             </button> 
         </div>
     </div>
-    <div class="block">
+    <div class="block block-video-controll">
+        <h6>{{threshold}}</h6>
+        <input type="range" min="3666" step="6" max="9999" [(ngModel)]="threshold" />
+    </div>
+    <div class="block block-video">
         <button id="startRecognition" disabled>Start Recognition</button>
-        <video id="inputVideo" width="640" height="480"></video>
-        <canvas id="ctx" width="640" height="480"></canvas>
+        <video id="inputVideo" width="270" height="210"></video>
+        <canvas id="ctx" width="270" height="210"></canvas>
     </div>
 </div>

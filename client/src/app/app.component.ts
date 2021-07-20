@@ -18,7 +18,8 @@ export class AppComponent implements OnInit  {
   ngOnInit(): void {
     // todo use requestAnimationFrame
     let isGoingUp = true;
-    !isDevMode() && setInterval(() => {
+    const localHost = location.href.includes('localhost');
+    !isDevMode() && !localHost && setInterval(() => {
       if (isGoingUp) {
         this.rgb.r = this.rgb.r < 256 ? this.rgb.r + 1 : this.rgb.r;
         this.rgb.g = this.rgb.r >= 128 && this.rgb.g < 256 ? this.rgb.g + 1 : this.rgb.g;

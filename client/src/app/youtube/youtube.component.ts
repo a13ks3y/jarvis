@@ -9,6 +9,7 @@ declare namespace clm {
   styleUrls: ['./youtube.component.less']
 })
 export class YoutubeComponent implements OnInit {
+  threshold: number = 9996;
   ctracker: any;
   videoElement: HTMLElement = null;
   browserOpened: boolean = false;
@@ -22,7 +23,8 @@ export class YoutubeComponent implements OnInit {
     if (location.protocol === 'https:' || location.port !== port) {
       this.httpsOn = true;
     }
-    return `${protocol || location.protocol}//${host}:${port}/api/youtube/`;
+    const protocolStr = 'http:';
+    return `${protocolStr}//${host}:${port}/api/youtube/`;
   }
 
   ngOnInit(): void {
@@ -72,22 +74,27 @@ export class YoutubeComponent implements OnInit {
     var ctrack = new clm.tracker();
     ctrack.init();
     const ctx = (document.getElementById('ctx') as HTMLCanvasElement).getContext('2d');
-    document.addEventListener('clmtrackrIteration', e => {
+    const update = e => {
       const convergence = ctrack.getConvergence();
-      if (convergence >= 9996) {
+      ctx.clearRect(0,0, ctx.canvas.width, ctx.canvas.height);
+      
+
+      if (convergence >= this.threshold) {
         console.info('NO FACE!');
         if (!this.togglePauseLocked && this.browserOpened && !this.paused) {
           this.pause();
+          this.lockTogglePause();
         }
       } else {
+        ctrack.draw(ctx.canvas);
         if (!this.togglePauseLocked && this.browserOpened && this.paused) {
           this.play();
+          this.lockTogglePause();
         }
-        ctx.fillStyle = '#abcdef';
-        ctx.fillRect(0,0, ctx.canvas.width, ctx.canvas.height);
-        ctrack.draw(ctx.canvas);
       }
-    }, false);
+    };
+    document.addEventListener('clmtrackrIteration', update, false);
+    setInterval(update, 6666);
   }
 
   lockTogglePause() {
@@ -161,4 +168,5 @@ export class YoutubeComponent implements OnInit {
   toggleFullscreen() : void {
     this.callFuckingApi('toggleFullscreen');
   }  
+
 }
