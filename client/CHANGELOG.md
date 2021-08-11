@@ -1,4 +1,8 @@
 # CHANGELOG
+## version 0.0.5
+- implement YouTube component with controls
+- improve mobile UI/UX
+- api-call related issues fixed
 ## version 0.0.4
 - add wiki script to scroll some random wiki pages (in progress)
 - replace default favicon
