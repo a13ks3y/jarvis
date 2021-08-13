@@ -1,5 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { YoutubeController } from './youtube.controller';
+import { BrowserService } from '../browser/browser.service';
+import { BrowserServiceMock } from '../wiki/browserServiceMock';
 
 describe('YoutubeController', () => {
   let controller: YoutubeController;
@@ -7,7 +9,11 @@ describe('YoutubeController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [YoutubeController],
-    }).compile();
+      providers: [BrowserService],
+    })
+      .overrideProvider(BrowserService)
+      .useClass(BrowserServiceMock)
+      .compile();
 
     controller = module.get<YoutubeController>(YoutubeController);
   });

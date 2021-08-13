@@ -7,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./wiki.component.less']
 })
 export class WikiComponent implements OnInit {
-  started: boolean = false;
+  started = false;
   apiBaseUrl: string;
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
+    // @todo: figure-out how to manage endpoints
     const host = '192.168.1.66';
     const port = '3000';
     this.apiBaseUrl = `http://${host}:${port}/api/wiki/`;
@@ -19,11 +20,11 @@ export class WikiComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  toggleStatus(): void {
+  async toggleStatus(): Promise<void> {
     if (!this.started) {
-      this.http.get(this.apiBaseUrl + 'start').toPromise();
+      await this.http.get(this.apiBaseUrl + 'start').toPromise();
     } else {
-      this.http.get(this.apiBaseUrl + 'stop').toPromise();
+      await this.http.get(this.apiBaseUrl + 'stop').toPromise();
     }
     this.started = !this.started;
   }
