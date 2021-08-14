@@ -35,7 +35,7 @@ export class ThreeService implements OnDestroy {
       alpha: true,    // transparent background
       antialias: true // smooth edges
     });
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
+    this.renderer.setSize(1024, 1024);
 
     // create the scene
     this.scene = new THREE.Scene();

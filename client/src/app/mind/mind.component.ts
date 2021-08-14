@@ -81,41 +81,23 @@ export class MindComponent implements OnInit {
       this.me.add('no');
       this.me.add('true');
       this.me.add('false');
+      this.me.add('fuck');
+      this.me.add('poop');
       let rotation = 0;
-      let direction = 1;
+      let direction = true;
       const camera = this.three.camera;
       const scene = this.three.scene;
       this.three.onKeyFrame = () => {
-        rotation += 0.05 * direction;
-        if (rotation >= 66.6) { direction = -1; }
-        if (rotation < 0) { direction = 1; }
+        rotation += 0.0666 * (direction ? 1 : -1);
+        direction = (rotation > 6.666 || rotation < -33.3)
+          ? !direction
+          : direction;
         camera.position.x = 0;
-        camera.position.y = Math.cos(rotation) * 8.75 + 16;
-        camera.position.z = Math.sin(rotation) * 4.2 + 16;
+        camera.position.y = rotation;
+        camera.position.z = -rotation;
         // camera.lookAt( scene.position ); // the origin
         camera.lookAt( this.me.valueMesh.position ); // the origin
       };
     });
-/*
-    console.time('download-words');
-    this.http.get('/assets/words.txt', {
-      responseType: 'text'
-    }).subscribe((response) => {
-      this.words = response.split('\n').map(w => w.toLowerCase());
-      this.meIndex = this.words.findIndex(w => w === 'me');
-      console.timeEnd('download-words');
-      this.three.createScene(this.canvas);
-      this.three.animate();
-      Word.scene = this.three.scene;
-
-      const loader = new THREE.FontLoader();
-
-      loader.load( '/assets/Bitwise_Regular.json', ( font ) => {
-        Word.fontOptions.font = font;
-        this.importantWords.push(new Word('me', this.meIndex));
-      });
-    });
-*/
   }
-
 }
