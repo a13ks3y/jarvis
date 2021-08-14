@@ -14,7 +14,7 @@ const DEBUGGER_PORT = '9222';
 export class BrowserService {
   static browserWSEndpoint: string;
   constructor(private httpService: HttpService) {}
-  async updateBrowserWebSocketEndpoint(): Promise<void> {
+  async updateBrowserWebSocketEndpoint(): Promise<boolean> {
     try {
       const response = await this.httpService
         .get<{ webSocketDebuggerUrl: string }>(
@@ -26,21 +26,36 @@ export class BrowserService {
         'browserWSEndpoint updated:',
         BrowserService.browserWSEndpoint,
       );
-    } catch (notKillError) {
-      console.info('Trying to launch browser');
-      console.error(notKillError.message);
-      await this.launchBrowser(false);
-      try {
-        console.info('Trying to RE-launch browser');
-        await this.launchBrowser(true);
-      } catch (killError) {
-        console.error(killError.message);
-      }
+      return true;
+    } catch (e) {
+      console.info(
+        'Can not connect, probably browser is not launched!',
+        e.message,
+      );
+      return false;
     }
   }
   async connect(url = 'about:blank'): Promise<puppeteer.Page> {
     if (!BrowserService.browserWSEndpoint) {
-      await this.updateBrowserWebSocketEndpoint();
+      const endpointUpdated = await this.updateBrowserWebSocketEndpoint();
+      if (!endpointUpdated) {
+        const browserIsLaunched = await this.launchBrowser(false);
+        const endpointUpdatedAfterLaunch =
+          await this.updateBrowserWebSocketEndpoint();
+        if (browserIsLaunched && endpointUpdatedAfterLaunch) {
+        } else {
+          console.info('Can not Launch browser, trying to Re-Launch:');
+          const browserIsReLaunched = await this.launchBrowser(true);
+          const endpointUpdatedAfterReLaunch =
+            await this.updateBrowserWebSocketEndpoint();
+          if (browserIsReLaunched && endpointUpdatedAfterReLaunch) {
+            if (!(await this.updateBrowserWebSocketEndpoint()))
+              throw new Error('Can not re-launch browser!');
+          } else {
+            throw new Error('Can not re-launch browser!');
+          }
+        }
+      }
     }
     const browser = await puppeteer.connect({
       browserWSEndpoint: BrowserService.browserWSEndpoint,
@@ -55,24 +70,28 @@ export class BrowserService {
     const browser = await page.browser();
     await browser.disconnect();
   }
-  async launchBrowser(killChrome: boolean): Promise<void> {
+  private async launchBrowser(killChrome: boolean): Promise<boolean> {
     if (BrowserService.browserWSEndpoint) {
-      return Promise.resolve();
+      return true;
     }
 
     const chromeProcessName =
       process.platform === 'darwin' ? 'Google Chrome' : 'chrome';
     try {
       if (killChrome) await fkill(chromeProcessName);
-    } finally {
-      const args = ['--no-first-run', '--no-default-browser-check'].join(' ');
-      try {
-        const cmd = `"${chromePath}" --remote-debugging-port=${DEBUGGER_PORT} ${args}`;
-        await promisify(exec)(cmd);
-        await this.updateBrowserWebSocketEndpoint();
-      } catch (e) {
-        console.log('Launch browser error:', e);
-      }
+    } catch (e) {
+      console.error('Killing chrome error', e);
+    }
+
+    const args = ['--no-first-run', '--no-default-browser-check'].join(' ');
+    try {
+      const cmd = `"${chromePath}" --remote-debugging-port=${DEBUGGER_PORT} ${args}`;
+      const result = await promisify(exec)(cmd);
+      console.info('Execute command:', cmd, result);
+      return true;
+    } catch (e) {
+      console.error('Launch browser error:', e);
+      return false;
     }
   }
 }
