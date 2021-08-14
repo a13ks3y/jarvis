@@ -1,6 +1,24 @@
 import {Component, OnInit} from '@angular/core';
 import {Md5 as md5} from 'ts-md5';
-import ENGLISH_WORDS from '../words_dictionary';
+const ENGLISH_WORDS = [
+  'pipka',
+  'poop',
+  'each',
+  'word',
+  'in',
+  'english',
+  'language',
+  'eat', 'more',
+  'this',
+  'french-fries',
+  'queue',
+  'zoom',
+  'pencil',
+  'apple',
+  'maroon',
+  'pink',
+  'floyd'
+];
 
 @Component({
   selector: 'the-cypher',
