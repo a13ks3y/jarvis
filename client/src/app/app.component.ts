@@ -83,7 +83,7 @@ export class AppComponent implements OnInit  {
   }
 
   wrapperTouchEnd($event: TouchEvent): void {
-    if (!this.listening) { this.startListen(); }
+    // if (!this.listening) { this.startListen(); }
   }
 
   @HostListener('document:mousemove', ['$event'])

@@ -2,7 +2,7 @@
     <h3>YouTube Auto-Browser</h3>
     <div class="block">
         <button (click)="start()">Start Browsing</button>
-        <button (click)="stop()">Stop Browsing</button>    
+        <button (click)="stop()">Stop Browsing</button>
     </div>
     <div class="block">
         <div class="panel">
@@ -20,10 +20,10 @@
             </button>
             <button class="square" (click)="toggleFullscreen()">
                 <i class="fa fa-expand"></i>
-            </button> 
+            </button>
         </div>
     </div>
-    <div class="block block-video-controll">
+    <div class="block block-video-control">
         <h6>{{threshold}}</h6>
         <input type="range" min="3666" step="6" max="9999" [(ngModel)]="threshold" />
     </div>

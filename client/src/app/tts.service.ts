@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class TTSService {
-  get currentVoice() {
+  get currentVoice(): SpeechSynthesisVoice {
     return this._voices[this._currentVoiceIndex];
   }
   set currentVoiceIndex(value: number) {
@@ -13,7 +13,7 @@ export class TTSService {
     }
     this._currentVoiceIndex = value;
   }
-  private _currentVoiceIndex: number = 0;
+  private _currentVoiceIndex = 0;
   get voices(): SpeechSynthesisVoice[] {
     if (!this._voices || !this._voices.length) {
       this.populateVoiceList();
@@ -29,22 +29,22 @@ export class TTSService {
       this.populateVoiceList();
     }, 666);
   }
-  populateVoiceList() {
+  populateVoiceList(): void {
     this._voices = speechSynthesis.getVoices();
   }
 
-  async say(phrase: string) {
+  async say(phrase: string): Promise<void> {
     const promise = new Promise<void>((resolve, reject) => {
-      let synth = window.speechSynthesis;
+      const synth = window.speechSynthesis;
       const utterThis = new SpeechSynthesisUtterance(phrase);
-      utterThis.onend = function (event) {
+      utterThis.onend = (event) => {
         // @todo free resources?
         resolve();
-      }
-      utterThis.onerror = function (event) {
+      };
+      utterThis.onerror = (event) => {
         console.error('SpeechSynthesisUtterance.onerror');
         reject();
-      }
+      };
       utterThis.voice = this._voices[this._currentVoiceIndex];
 
       utterThis.pitch = 0.666;
@@ -53,11 +53,11 @@ export class TTSService {
     });
   }
 
-  tell(phrases: string[], interval:number = 666) {
+  tell(phrases: string[], interval: number = 666): void {
     this.say(phrases.shift()).then(r => {
       setTimeout(() => {
-        phrases.length && this.tell(phrases, interval)
+        phrases.length && this.tell(phrases, interval);
       }, interval);
-    })
+    });
   }
 }

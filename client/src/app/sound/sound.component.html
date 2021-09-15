@@ -1,0 +1,7 @@
+<!-- @Todo: It should be done by service by itself!  -->
+<audio *ngFor="let track of tracks" src="{{track.url}}" id="audio-{{track.name}}" ></audio>
+<ul class="sfx-buttons-grid" style="position: absolute; left: 0; top: 0; background: gold;">
+  <li *ngFor="let track of tracks">
+    <button style="background: cyan; width: 66vw; height: 66vh;" (click)="playTrack(track)">{{track.name}}</button>
+  </li>
+</ul>

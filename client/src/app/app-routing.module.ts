@@ -8,8 +8,18 @@ import {DualityComponent} from './duality/duality.component';
 import { MatrixComponent } from './matrix/matrix.component';
 import { YoutubeComponent } from './youtube/youtube.component';
 import { WikiComponent } from './wiki/wiki.component';
+import {ViewComponent} from './view/view.component';
+import {SoundComponent} from "./sound/sound.component";
 
 const routes: Routes = [
+  {
+    path: 'sound',
+    component: SoundComponent
+  },
+  {
+    path: 'view',
+    component: ViewComponent
+  },
   {
     path: 'wiki',
     component: WikiComponent
