@@ -1,5 +1,11 @@
 <div class="block">
   <h3>Current Default Camera (if present)</h3>
-  <video #inputVideo ></video>
-  <button (click)="startInput()" [disabled]="!inputVideoEnabled">Press to stat</button>
+  <video #inputVideo width="420"></video>
+  <button (click)="startInput()" [disabled]="!inputVideoEnabled">
+    <i class="fa fa-play"></i>
+  </button>
+  <button (click)="stopInput()" [disabled]="!inputVideoEnabled">
+    <i class="fa fa-stop"></i>
+  </button>
+
 </div>

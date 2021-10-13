@@ -18,13 +18,15 @@ export class ViewComponent implements AfterViewInit  {
     });
     setTimeout(() => {
       this.inputVideoEnabled = true;
-    }, 6666);
+    }, 666);
   }
 
   startInput(): void {
-    // tslint:disable-next-line:no-console
-    console.info('Starting video capture.');
     const videoElement = this.inputVideo.nativeElement;
+    if (!videoElement.paused) {
+      setTimeout(() => videoElement.play(), 0);
+      return;
+    }
     const gumFail = (e) => {
       this.inputVideoEnabled = true;
       alert('There was some problem trying to fetch video from your webcam, using a fallback video instead. \n' + e);
@@ -68,5 +70,9 @@ export class ViewComponent implements AfterViewInit  {
       alert('Your browser does not seem to support getUserMedia, using a fallback video instead.');
     }
 
+  }
+
+  stopInput(): void {
+    this.inputVideo.nativeElement.pause();
   }
 }

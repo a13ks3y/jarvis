@@ -35,7 +35,7 @@ body {
   border: #202020 solid 0.666pt;
   padding: 1.666rem 0.666rem;
   text-align: center;
-  width: 66.6%;
+  min-width: 66.6%;
   margin: auto;
   min-height: 50%;
   border-top-left-radius: 1.666rem;
@@ -106,6 +106,9 @@ button.square {
 }
 button:hover {
   cursor: pointer;
+}
+button:disabled, button[disabled] {
+  color: blueviolet;
 }
 label span {
   margin: 0 0.666rem;

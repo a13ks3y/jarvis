@@ -12,8 +12,8 @@ import { HttpModule } from '@nestjs/axios';
   imports: [
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', '..', 'docs'),
-      serveRoot: '/jarvis/',      
-      exclude: ['/api*', '/']
+      serveRoot: '/jarvis/',
+      exclude: ['/api*', '/'],
     }),
     HttpModule,
   ],
