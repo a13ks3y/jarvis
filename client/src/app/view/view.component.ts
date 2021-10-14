@@ -6,7 +6,6 @@ import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/
   styleUrls: ['./view.component.less']
 })
 export class ViewComponent implements AfterViewInit  {
-
   constructor() { }
   inputVideoEnabled = false;
   @ViewChild('inputVideo')
@@ -27,6 +26,7 @@ export class ViewComponent implements AfterViewInit  {
       setTimeout(() => videoElement.play(), 0);
       return;
     }
+    // @todo: DRY move it to separate method (maybe to some service?)
     const gumFail = (e) => {
       this.inputVideoEnabled = true;
       alert('There was some problem trying to fetch video from your webcam, using a fallback video instead. \n' + e);

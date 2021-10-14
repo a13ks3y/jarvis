@@ -5,6 +5,18 @@
 }
 html {
   font-size: 27px;
+  @media (max-width: 1024px) {
+    font-size: 24px;
+  }
+  @media (max-width: 640px) {
+    font-size: 18px;
+  }
+  @media (max-width: 520px) {
+    font-size: 16px;
+  }
+  @media (max-width: 420px) {
+    font-size: 9px;
+  }
 }
 
 body {
@@ -13,6 +25,9 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 @keyframes BorderBooze {
   0% {
@@ -35,7 +50,7 @@ body {
   border: #202020 solid 0.666pt;
   padding: 1.666rem 0.666rem;
   text-align: center;
-  min-width: 66.6%;
+  min-width: 3.666rem;
   margin: auto;
   min-height: 50%;
   border-top-left-radius: 1.666rem;
