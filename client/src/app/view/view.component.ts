@@ -6,15 +6,20 @@ import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/
   styleUrls: ['./view.component.less']
 })
 export class ViewComponent implements AfterViewInit  {
-  constructor() { }
+  private stream: never;
+  private ctx: CanvasRenderingContext2D;
+  constructor() {}
   inputVideoEnabled = false;
   @ViewChild('inputVideo')
   inputVideo: ElementRef<HTMLVideoElement>;
+  @ViewChild('inputVideoCanvas')
+  inputVideoCanvas: ElementRef<HTMLCanvasElement>;
 
   ngAfterViewInit(): void {
     this.inputVideo.nativeElement.addEventListener('canplay', () => {
       this.inputVideoEnabled = true;
     });
+    this.ctx = this.inputVideoCanvas.nativeElement.getContext('2d');
     setTimeout(() => {
       this.inputVideoEnabled = true;
     }, 666);
@@ -33,6 +38,7 @@ export class ViewComponent implements AfterViewInit  {
     };
     const gumSuccess = stream => {
       // add camera stream if getUserMedia succeeded
+      this.stream = stream as never;
       if ('srcObject' in videoElement) {
         // @ts-ignore
         videoElement.srcObject = stream as never;
@@ -44,6 +50,8 @@ export class ViewComponent implements AfterViewInit  {
         // adjustVideoProportions();
         // noinspection JSIgnoredPromiseFromCall
         videoElement.play();
+        this.inputVideoCanvas.nativeElement.setAttribute('width', videoElement.getAttribute('width'));
+        this.inputVideoCanvas.nativeElement.setAttribute('height', videoElement.getAttribute('height'));
       };
       this.inputVideoEnabled = false;
     };
@@ -72,7 +80,19 @@ export class ViewComponent implements AfterViewInit  {
 
   }
 
-  stopInput(): void {
+  pauseInput(): void {
     this.inputVideo.nativeElement.pause();
+  }
+  stopInput(): void {
+    const stream = this.stream as MediaStream;
+    stream.removeTrack(stream.getTracks()[0]);
+    this.inputVideo.nativeElement.setAttribute('src', null);
+  }
+  captureOnce(): void {
+    this.ctx.canvas.width = this.inputVideo.nativeElement.videoWidth;
+    this.ctx.canvas.height = this.inputVideo.nativeElement.videoHeight;
+    this.ctx.drawImage(this.inputVideo.nativeElement, 0, 0);
+    const data = this.ctx.canvas.toDataURL('image/png');
+    console.log('Data to send:', data);
   }
 }
