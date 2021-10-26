@@ -88,16 +88,20 @@ export class YoutubeComponent implements OnInit {
 
 
       if (convergence >= this.threshold) {
+/*
         if (!this.togglePauseLocked && this.browserOpened && !this.paused) {
           this.pause();
           this.lockTogglePause();
         }
+*/
       } else {
         ctrack.draw(ctx.canvas);
+/*
         if (!this.togglePauseLocked && this.browserOpened && this.paused) {
           this.play();
           this.lockTogglePause();
         }
+*/
       }
     };
     document.addEventListener('clmtrackrIteration', update, false);

@@ -7,7 +7,7 @@ async function bootstrap() {
   app.enableShutdownHooks();
   app.enableCors();
   app.setGlobalPrefix('api', {
-    exclude: ['.', '/', './'],
+    exclude: ['.', '/', './', 'jarvis', 'jarvis/', '/jarvis/'],
   });
   await app.listen(3000);
 }

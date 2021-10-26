@@ -1,4 +1,5 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {ViewService} from '../view.service';
 
 @Component({
   selector: 'the-view',
@@ -8,7 +9,7 @@ import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/
 export class ViewComponent implements AfterViewInit  {
   private stream: never;
   private ctx: CanvasRenderingContext2D;
-  constructor() {}
+  constructor(private service: ViewService) {}
   inputVideoEnabled = false;
   @ViewChild('inputVideo')
   inputVideo: ElementRef<HTMLVideoElement>;
@@ -93,6 +94,6 @@ export class ViewComponent implements AfterViewInit  {
     this.ctx.canvas.height = this.inputVideo.nativeElement.videoHeight;
     this.ctx.drawImage(this.inputVideo.nativeElement, 0, 0);
     const data = this.ctx.canvas.toDataURL('image/png');
-    console.log('Data to send:', data);
+    this.service.captureDataUrlOnce(data, new Date());
   }
 }

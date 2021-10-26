@@ -9,7 +9,7 @@ import { MatrixComponent } from './matrix/matrix.component';
 import { YoutubeComponent } from './youtube/youtube.component';
 import { WikiComponent } from './wiki/wiki.component';
 import {ViewComponent} from './view/view.component';
-import {SoundComponent} from "./sound/sound.component";
+import {SoundComponent} from './sound/sound.component';
 
 const routes: Routes = [
   {
