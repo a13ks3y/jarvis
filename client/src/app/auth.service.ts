@@ -1,12 +1,15 @@
 import {Injectable} from '@angular/core';
-import {HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {Observable} from 'rxjs';
 // @todo remove this class or use it?
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
   constructor() {}
-
-  intercept(req: HttpRequest<any>, next: HttpHandler) {
+  /*
+    Patch all http-requests with CORS headers.
+  * */
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const authReq = req.clone({
       headers: req.headers
         // .set('Access-Control-Allow-Origin', '*')
