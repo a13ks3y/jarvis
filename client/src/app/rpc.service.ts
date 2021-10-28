@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from "rxjs";
 /*
 * This should encapsulate everything with transport data between nodes (both clients and servers),
 * using every available options (websockets, webRTC, jsonp, etc.)
@@ -33,7 +34,7 @@ export class RPCService {
     return Promise.resolve(true);
   }
 
-  putFile(route: string, data: { dataUrl: string; createDateTime: Date }): Promise<any> {
+  putFile(route: string, data: { dataUrl: string; createDateTime: Date }): Observable<any> {
     const fileName = `${data.dataUrl.replace('/', '-')}_${data.createDateTime.toUTCString()}`;
     const fileData = new FormData();
     const file = new File([data.dataUrl], fileName);
@@ -41,6 +42,6 @@ export class RPCService {
     const url = RPCService.makeURL(route);
     return this.http.put(url, fileData, {
       headers: new HttpHeaders('multipart/form-data')
-    }).toPromise();
+    });
   }
 }
