@@ -111,8 +111,17 @@ button {
   padding: 0.333rem;
   font-size: 0.666rem;
   color: #21b456;
-  border: 2px solid #214227;
+  border-color: #214227;
+  border: 0.666rem solid #214227;
+  border-radius: 1.666rem;
   background: black;
+  @media (max-width: 420px) {
+    font-size: 3.666rem;    
+    margin: 0 1.666rem;
+    padding: 1.333rem 3.333rem;
+    border: 1.333rem solid #214227;
+    border-radius: 3.666rem;
+  }
 }
 button.square {
   width: 1.666rem;
@@ -123,7 +132,8 @@ button:hover {
   cursor: pointer;
 }
 button:disabled, button[disabled] {
-  color: blueviolet;
+  color: gray;
+  border-color: gray;
 }
 label span {
   margin: 0 0.666rem;
@@ -151,6 +161,10 @@ textarea {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+}
+
+ul, li {
+  list-style: none;
 }
 
 /* width */

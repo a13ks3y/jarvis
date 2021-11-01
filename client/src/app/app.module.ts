@@ -18,6 +18,8 @@ import { YoutubeComponent } from './youtube/youtube.component';
 import { WikiComponent } from './wiki/wiki.component';
 import { ViewComponent } from './view/view.component';
 import { SoundComponent } from './sound/sound.component';
+import { CapitalizePipe } from './capitalize.pipe';
+import { StripDashPipe } from './strip-dash.pipe';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { SoundComponent } from './sound/sound.component';
     YoutubeComponent,
     WikiComponent,
     ViewComponent,
-    SoundComponent
+    SoundComponent,
+    CapitalizePipe,
+    StripDashPipe
   ],
     imports: [
         BrowserModule,
