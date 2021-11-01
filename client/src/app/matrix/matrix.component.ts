@@ -9,15 +9,17 @@ export class MatrixComponent implements OnInit {
 
   letters: string[] = [];
 
-  code: string = 'Pipka!';
+  code = 'Pipka!';
 
   constructor() { }
 
   ngOnInit(): void {
     const text = '';
-    // todo fill letters array and make awesome matrix effect, that would be useful, so you can actualy read it.
-    
-    
+    // @todo: make code-rain effect, that would be useful, so you can actually read it.
+    // to show readable text, the text should be broken to small pieces.
+    // translate rows to vertical lines or not?
+    // there is a couple layers in original code-rain effect,
+    // how much layers should it be? which text should be placed on different layers?
   }
 
 }
