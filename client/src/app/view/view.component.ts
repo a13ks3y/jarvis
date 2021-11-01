@@ -1,5 +1,7 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ViewService} from '../view.service';
+import {NodesService} from '../nodes.service';
+import {NodeInfo} from '../../../../server/shared/nodeInfo';
 
 @Component({
   selector: 'the-view',
@@ -9,7 +11,14 @@ import {ViewService} from '../view.service';
 export class ViewComponent implements AfterViewInit  {
   private stream: never;
   private ctx: CanvasRenderingContext2D;
-  constructor(private service: ViewService) {}
+  nodes: NodeInfo[] = [];
+  constructor(private service: ViewService, private nodesService: NodesService) {
+    this.nodesService.getNodes().then(r => this.nodes = r).catch(err => {
+      // @todo: this not should be a case, getNodes should use alternative vay to determinate nodes (such as {TgService})
+      this.nodes.push(NodeInfo.self);
+      console.error('Am I alone?', err);
+    });
+  }
   inputVideoEnabled = false;
   @ViewChild('inputVideo')
   inputVideo: ElementRef<HTMLVideoElement>;

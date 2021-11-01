@@ -28,6 +28,8 @@
     "@nestjs/serve-static": "^2.2.2",
     "chrome-finder": "^1.0.7",
     "fkill": "^7.2.1",
+    "ip-public": "^1.0.5",
+    "lodash": "^4.17.21",
     "puppeteer-core": "^10.2.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",

@@ -1,0 +1,6 @@
+<!-- @todo: make modal "transclude" component or use material (or similar) -->
+<div class="modal" *ngIf="!loggedIn">
+  <input type="text" name="phone" placeholder="Phone" [(ngModel)]="phone"/>
+  <input type="password" name="password" placeholder="Password" [(ngModel)]="password">
+  <button><i class="fa fa-sign-in" (click)="login()"></i></button>
+</div>

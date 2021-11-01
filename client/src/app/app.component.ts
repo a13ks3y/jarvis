@@ -19,6 +19,7 @@ export class AppComponent implements OnInit  {
     // todo use requestAnimationFrame
     let isGoingUp = true;
     const localHost = location.href.includes('localhost');
+    // tslint:disable-next-line:no-unused-expression
     !isDevMode() && !localHost && setInterval(() => {
       if (isGoingUp) {
         this.rgb.r = this.rgb.r < 256 ? this.rgb.r + 1 : this.rgb.r;

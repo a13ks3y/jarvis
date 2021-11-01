@@ -1,12 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 
 import { NodesService } from './nodes.service';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('NodesService', () => {
   let service: NodesService;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+    }).compileComponents();
     service = TestBed.inject(NodesService);
   });
 
@@ -17,5 +20,8 @@ describe('NodesService', () => {
   it('should has a list of nodes which is empty', () => {
     expect(service.nodes).toBeDefined();
     expect(service.nodes.length).toEqual(0);
+  });
+  it('should update node list', () => {
+    expect(service.getNodes).toBeDefined();
   });
 });

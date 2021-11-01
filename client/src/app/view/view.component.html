@@ -1,4 +1,9 @@
 <div class="block">
+  <select name="nodes" id="nodes">
+    <option *ngFor="let node of nodes">
+      {{node.title}} {{node.internalIP}}
+    </option>
+  </select>
   <h3>Current Default Camera (if present)</h3>
   <video #inputVideo style="min-width: 320px;"></video>
   <button (click)="startInput()" [disabled]="!inputVideoEnabled">

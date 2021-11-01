@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MindComponent } from './mind/mind.component';
-import { NodesComponent } from './nodes/nodes.component';
 import {XorComponent} from './xor/xor.component';
 import {CypherComponent} from './cypher/cypher.component';
 import {DualityComponent} from './duality/duality.component';
@@ -39,10 +38,6 @@ const routes: Routes = [
   {
     path: 'xor',
     component: XorComponent
-  },
-  {
-    path: 'nodes',
-    component: NodesComponent
   },
   {
     path: 'mind',

@@ -44,4 +44,9 @@ export class RPCService {
       headers: new HttpHeaders('multipart/form-data')
     });
   }
+  // @todo: make optional query params (and test it!)
+  get(route: string): Observable<any> {
+    const url = RPCService.makeURL(route);
+    return this.http.get(url);
+  }
 }

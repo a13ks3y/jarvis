@@ -18,6 +18,7 @@ import { YoutubeComponent } from './youtube/youtube.component';
 import { WikiComponent } from './wiki/wiki.component';
 import { ViewComponent } from './view/view.component';
 import { SoundComponent } from './sound/sound.component';
+import { TgLoginComponent } from './tg-login/tg-login.component';
 import { CapitalizePipe } from './capitalize.pipe';
 import { StripDashPipe } from './strip-dash.pipe';
 
@@ -35,6 +36,8 @@ import { StripDashPipe } from './strip-dash.pipe';
     YoutubeComponent,
     WikiComponent,
     ViewComponent,
+    SoundComponent,
+    TgLoginComponent
     SoundComponent,
     CapitalizePipe,
     StripDashPipe

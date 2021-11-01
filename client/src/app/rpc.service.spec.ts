@@ -48,4 +48,11 @@ describe('RPCService', () => {
     service.putFile(route, data);
     expect(spy).toHaveBeenCalled();
   });
+  it('should make a get call to a server', () => {
+    const route = 'test/route';
+    const url = RPCService.makeURL(route);
+    const spy = spyOn(service.http, 'get');
+    service.get(route);
+    expect(spy).toHaveBeenCalledWith(url);
+  })
 });

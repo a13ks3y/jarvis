@@ -7,11 +7,12 @@ import { BrowserService } from './browser/browser.service';
 import { WikiController } from './wiki/wiki.controller';
 import { HttpModule } from '@nestjs/axios';
 import { ViewController } from './view/view.controller';
+import { NodesController } from './nodes/nodes.controller';
 
 @Module({
   imports: [
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', '..', 'docs'),
+      rootPath: join(__dirname, '..', '..', '..', 'docs'),
       serveRoot: '/jarvis/',
       exclude: ['/api*', '/'],
     }),
@@ -22,6 +23,7 @@ import { ViewController } from './view/view.controller';
     YoutubeController,
     WikiController,
     ViewController,
+    NodesController,
   ],
   providers: [BrowserService],
 })
