@@ -23,6 +23,12 @@ Don't install it.
 
 ### Insights
 
+TDLib and MTProto (or other messengers/communication-channels) could be
+used to bypass NAT, store data, schedule and perform some actions, 
+using some key-words, tags and patterns from "Saved Messages" and from other chats
+as commands.
+Also, bot-api can be used to "talk" to strangers (guests in my house for example).
+
 How to manage and control different nodes? In scenario where Jarvis greet someone in living-room (where laptop placed)
 he should use those speakers instead of speakers on my phone. Probably some-kind of tabs-kind-of interface, like same
 controls, but different tabs - different devices. It should be really flexible, I think it could be any combination of

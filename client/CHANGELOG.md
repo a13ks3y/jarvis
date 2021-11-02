@@ -1,4 +1,9 @@
 # CHANGELOG
+## version 0.1.0
+- implementation of view and nodes components (in progress)
+- RPC abstraction layer (in progress)
+- unit-tests are all passing 🎉
+- first step of TDLib integration implementation
 ## version 0.0.5
 - implement YouTube component with controls
 - improve mobile UI/UX
