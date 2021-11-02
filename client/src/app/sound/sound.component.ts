@@ -22,8 +22,13 @@ export class SoundComponent implements OnInit {
     if (!this.locked) {
       this.locked = true;
       this.audioService.muted = false;
-      this.audioService.play(track.name).finally(() => {
-        setTimeout(() => this.locked = false, 666);
+      this.audioService.play(track.name).then((result) => {
+        // @todo: this call is ugly, refactor API
+        result.endPromise.then(() => {
+          this.locked = false;
+        });
+      }).catch(() => {
+        this.locked = false;
       });
     } else {
       console.warn('Too Many press!');
