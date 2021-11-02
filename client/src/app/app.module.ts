@@ -37,7 +37,7 @@ import { StripDashPipe } from './strip-dash.pipe';
     WikiComponent,
     ViewComponent,
     SoundComponent,
-    TgLoginComponent
+    TgLoginComponent,
     SoundComponent,
     CapitalizePipe,
     StripDashPipe
