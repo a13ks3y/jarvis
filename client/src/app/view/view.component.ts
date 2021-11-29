@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
 import {ViewService} from '../view.service';
 import {NodesService} from '../nodes.service';
 import {NodeInfo} from '../../../../server/shared/nodeInfo';

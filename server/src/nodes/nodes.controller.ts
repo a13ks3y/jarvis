@@ -12,7 +12,7 @@ export class NodesController {
     const currentNode = await this.getCurrentNodeInfo();
     const requestNode = new NodeInfo(
       `REQ_NODE#${Math.floor(Math.random() * 10)}`,
-      request.ip,
+      request.headers.host,
       request.ip,
     );
     this.createOrUpdateNodeInfo(currentNode);
