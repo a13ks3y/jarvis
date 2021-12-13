@@ -12,14 +12,16 @@ Don't install it.
 
 ## Road-map
 - Speed-up client build process (taking too much time for now, probably because of heavy assets) 
-- ~~Rearrange server and client code (maek ntestjs app, docs as root for client and move client root to the same (or other) folder)~~
+- ~~Rearrange server and client code (make nestjs app, docs as root for client and move client root to the same (or other) folder)~~
 - Add wiki-auto-reading feature. Should look like screencast of random wiki articles browsing (random pieces text
   selections, mouse moves, unnecessary scrolling, following links (only wiki)).
   Selenium or any other solution.
-- Encrypted private information (like passwords, photos, etc)
+- Encrypted private information (like passwords, photos, etc.)
 - Reduce bundle size, optimize words part (using some sort of distributed data-base?)
 - Rethink-mind conception, add T-Queue ("Дрочередь"), update back-end logic
-- NAT/CORS break-through
+- NAT/CORS break-through (in progress, MTProto-approach)
+- Agile-like GTD system
+- Node script to parse and import notes form Evernote (once and for all). 
 
 ### Insights
 

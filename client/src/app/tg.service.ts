@@ -36,10 +36,8 @@ export class TgService {
    * @param query The request to send. Consult TdLib & JSON interface API for help.
    * @returns The result of the request
    */
-  sendQuery(query: TdApi.TdFunction): Promise<TdApi.TdFunctionReturn<any> | TdApi.td_Error> {
-    if (query['@type'] !== 'setTdlibParameters') {
-      console.log('Query: ', query);
-    }
+  sendQuery(query: any): Promise<TdApi.TdFunctionReturn<any> | TdApi.td_Error> {
+    console.log('Query: ', query);
     return new Promise((resolve, reject) => {
       TgService.tdClient.send(query).then((result: TdApi.TdFunctionReturn<any>) => {
           console.log('Query result: ', result);
